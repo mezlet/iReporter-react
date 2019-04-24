@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --mode production",
     "dev:start": "webpack-dev-server --open --debug --mode development",
-    "start": "npm run build && npm run serve",
+    "start": "npm run build && node server.js",
     "precommit": "NODE_ENV=production lint-staged"
   },
   "repository": {
