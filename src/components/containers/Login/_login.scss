@@ -1,0 +1,46 @@
+.login-container {
+  width: 350px;
+  margin: 10% 35% 10% 35%;
+  background-color: #ffffff;
+  border: 2px solid rgba(253, 248, 248, 0.637);
+  box-shadow: 5px 4px 3px 4px #dbd9d9;
+  h3 {
+    text-align: center;
+    // color: #000033;
+    padding: 2%;
+  }
+  p {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .signup-form {
+    width: 100%;
+    padding: 5%;
+  }
+  .logform_btn {
+    background-color: #000033;
+    color: #ffffff;
+    border: none;
+    padding: 10px 10px;
+    font-size: 17px;
+    font-family: Raleway;
+    cursor: pointer;
+    margin-left: 35%;
+    width: 100px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .logform_btn:hover {
+    opacity: 0.8;
+    background-color: #000033;
+    color: #ffffff;
+  }
+  .signup-image {
+    margin-left: auto;
+    margin-top: 40px;
+    margin-right: auto;
+    display: block;
+  }
+}

@@ -1,0 +1,16 @@
+.navbar {
+  ul {
+    list-style: none;
+    float: left;
+  }
+  li {
+    float: left;
+    margin-right: 40px;
+    margin-top: 40px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .nav-link {
+    color: #000033;
+  }
+}
