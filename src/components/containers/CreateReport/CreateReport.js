@@ -3,11 +3,11 @@
 /* eslint-disable no-undef */
 import React, { Component } from "react";
 import { Form, Button } from "semantic-ui-react";
-import ContentHeader from "../../presentation/ContentHeader/ContentHeader";
 import Footer from "../../presentation/Footer/Footer";
+import withContentHeader from "../../../hoc/withContentHeader";
 
 // eslint-disable-next-line react/prefer-stateless-function
-export default class CreateReport extends Component {
+class CreateReport extends Component {
   render() {
     const options = [
       { key: "r", text: "Red-flag", value: "Red-flag" },
@@ -15,7 +15,6 @@ export default class CreateReport extends Component {
     ];
     return (
       <div>
-        <ContentHeader />
         <div className="record-form-container">
           <h2>Report an Incident</h2>
 
@@ -50,3 +49,5 @@ export default class CreateReport extends Component {
     );
   }
 }
+
+export default withContentHeader(CreateReport);

@@ -2,11 +2,47 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+// import PropTypes from "prop-types";
+import { Link, withRouter } from "react-router-dom";
 import { Form, Input, Image, Button } from "semantic-ui-react";
+import { loginUser } from "../../../redux/actions/auth/auth-dispatchers";
 
-export default class SignUp extends Component {
+export class Login extends Component {
+  static propTypes = {
+    // auth: PropTypes.shape().isRequired
+  };
+
+  state = {
+    user: {
+      email: "",
+      password: ""
+    }
+  };
+
+  handleChange = event => {
+    const { user } = this.state;
+    this.setState({
+      user: {
+        ...user,
+        [event.target.name]: event.target.value
+      }
+    });
+  };
+
+  handleSubmit = async event => {
+    event.preventDefault();
+    const { user } = this.state;
+    const { login } = this.props;
+    await login(user);
+    // const { auth } = this.props;
+    // const { success } = auth;
+    window.location.replace("/");
+  };
+
   render() {
+    const { user } = this.state;
+    const { email, password } = user;
     return (
       <div className="login-container">
         <Image
@@ -14,18 +50,26 @@ export default class SignUp extends Component {
           className="signup-image"
         />
         <h3> Welcome Back !!!</h3>
-        <Form className="signup-form">
+        <Form className="signup-form" onSubmit={this.handleSubmit}>
           <Form.Field required>
-            <label id="form-label">Username</label>
-            <Input />
+            <label id="form-label">Email</label>
+            <Input
+              type="email"
+              name="email"
+              value={email}
+              onChange={this.handleChange}
+            />
           </Form.Field>
           <Form.Field required>
             <label id="form-label">Password</label>
-            <Input />
+            <Input
+              type="password"
+              name="password"
+              value={password}
+              onChange={this.handleChange}
+            />
           </Form.Field>
-          <Button as={Link} to="/create" className="logform_btn">
-            Login
-          </Button>
+          <Button className="logform_btn">Login</Button>
         </Form>
         <p className="form_extra">
           Don't have an account? <Link to="/signup">Sign up</Link>
@@ -34,3 +78,11 @@ export default class SignUp extends Component {
     );
   }
 }
+
+const routedLogin = withRouter(Login);
+const mapStateToProps = state => ({ auth: state.auth });
+const connectLogin = connect(
+  mapStateToProps,
+  { login: loginUser }
+)(routedLogin);
+export default connectLogin;
