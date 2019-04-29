@@ -1,0 +1,13 @@
+.incident-viewAll-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+
+  .incident-viewAll-title {
+    text-align: center;
+    padding: 2%;
+  }
+  .incident-viewAll-image {
+    height: 200px;
+  }
+}
