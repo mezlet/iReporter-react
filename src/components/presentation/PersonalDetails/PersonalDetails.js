@@ -21,7 +21,7 @@ const PersonalDetails = () => {
               Other Name: <span className="profile_span">Lilian</span>
             </h4>
             <h4 className="report_total">
-              Email Address:{" "}
+              Email Address:
               <span className="profile_span">janedoe@gmail.com</span>
             </h4>
             <h4 className="report_total">
