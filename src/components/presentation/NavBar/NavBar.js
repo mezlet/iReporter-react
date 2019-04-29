@@ -31,7 +31,7 @@ const NavBar = () => {
               <Dropdown.Menu>
                 <Dropdown.Header content="Select Record" />
                 <Dropdown.Divider />
-                <Dropdown.Item text="All Records" as={Link} to="/viewAll" />
+                <Dropdown.Item text="All Records" as={Link} to="/view-all" />
                 <Dropdown.Item text="Red-flags" as={Link} to="/viewRed-flag" />
                 <Dropdown.Item
                   text="Interventions"
