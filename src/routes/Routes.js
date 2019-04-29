@@ -8,6 +8,9 @@ import CreateReport from "../components/containers/CreateReport/CreateReport";
 import Profile from "../components/containers/Profile/Profile";
 import Record from "../components/containers/Record/Record";
 import NewReportView from "../components/containers/NewReportView/NewReportView";
+import ViewIncident from "../components/containers/ViewIncident/ViewIncident";
+import ViewRedFlag from "../components/containers/ViewRedFlag/ViewRedFlag";
+import ViewIntervention from "../components/containers/ViewIntervention/ViewIntervention";
 import EditReport from "../components/containers/EditReport/EditReport";
 
 const history = createBrowserHistory();
@@ -23,6 +26,9 @@ const route = () => (
       <Route path="/record" component={Record} exact />
       <Route path="/edit-incident/:id" component={EditReport} exact />
       <Route path="/new-report-view/:id" component={NewReportView} exact />
+      <Route path="/view-all" component={ViewIncident} exact />
+      <Route path="/view-red-flags" component={ViewRedFlag} exact />
+      <Route path="/view-interventions" component={ViewIntervention} exact />
     </Switch>
   </Route>
 );

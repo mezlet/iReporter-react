@@ -1,24 +1,37 @@
-/* eslint-disable jsx-a11y/label-has-for */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable react/prefer-stateless-function */
+/* eslint-disable jsx-a11y/label-has-for */
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import PropTypes from "prop-types";
-import { Link, withRouter } from "react-router-dom";
+import { toast } from "react-toastify";
+import { Link, withRouter, Redirect } from "react-router-dom";
 import { Form, Input, Image, Button } from "semantic-ui-react";
 import { loginUser } from "../../../redux/actions/auth/auth-dispatchers";
 
 export class Login extends Component {
-  static propTypes = {
-    // auth: PropTypes.shape().isRequired
-  };
-
   state = {
     user: {
       email: "",
       password: ""
     }
   };
+
+  componentDidUpdate({ auth: { message: prevMessage } }) {
+    const {
+      auth: {
+        message,
+        errors: { response }
+      }
+    } = this.props;
+
+    if (response) {
+      const { data } = response;
+      toast.error(data.message);
+    }
+
+    if (prevMessage !== message) {
+      toast.success(message);
+    }
+  }
 
   handleChange = event => {
     const { user } = this.state;
@@ -35,14 +48,21 @@ export class Login extends Component {
     const { user } = this.state;
     const { login } = this.props;
     await login(user);
-    // const { auth } = this.props;
-    // const { success } = auth;
-    window.location.replace("/");
   };
 
   render() {
     const { user } = this.state;
     const { email, password } = user;
+    const { auth } = this.props;
+
+    if (auth.success) {
+      const {
+        user: { isadmin }
+      } = auth;
+
+      return isadmin ? <Redirect to="/admin" /> : <Redirect to="/create" />;
+    }
+
     return (
       <div className="login-container">
         <Image

@@ -1,0 +1,40 @@
+import axios from "axios";
+import * as actions from "./incident-actions";
+
+const baseUrl = "http://localhost:8800/api/v1";
+
+export const viewAllIncident = () => async dispatch => {
+  dispatch(actions.viewIncidentStart());
+  try {
+    const res = await axios.get(`${baseUrl}/incident`, {
+      headers: { "x-access-token": localStorage.getItem("token") }
+    });
+    dispatch(actions.viewIncidentSuccess(res.data.data));
+  } catch (errors) {
+    dispatch(actions.viewIncidentFailure(errors));
+  }
+};
+
+export const viewRedFlag = () => async dispatch => {
+  dispatch(actions.viewIncidentStart());
+  try {
+    const res = await axios.get(`${baseUrl}/redflag`, {
+      headers: { "x-access-token": localStorage.getItem("token") }
+    });
+    dispatch(actions.viewIncidentSuccess(res.data.data));
+  } catch (errors) {
+    dispatch(actions.viewIncidentFailure(errors));
+  }
+};
+
+export const viewIntervention = () => async dispatch => {
+  dispatch(actions.viewInterventionStart());
+  try {
+    const res = await axios.get(`${baseUrl}/intervention`, {
+      headers: { "x-access-token": localStorage.getItem("token") }
+    });
+    dispatch(actions.viewInterventionSuccess(res.data.data));
+  } catch (errors) {
+    dispatch(actions.viewInterventionFailure(errors));
+  }
+};

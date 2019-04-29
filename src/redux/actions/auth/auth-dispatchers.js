@@ -7,10 +7,9 @@ export const loginUser = data => async dispatch => {
   dispatch(actions.loginStart());
   try {
     const res = await axios.post(`${baseUrl}/login`, data);
-
-    dispatch(
-      actions.loginSuccess({ ...res.data.user, message: "Login success" })
-    );
+    const { token } = res.data.data[0];
+    localStorage.setItem("token", token);
+    dispatch(actions.loginSuccess({ ...res.data, message: "Login success" }));
   } catch (errors) {
     dispatch(actions.loginFailure(errors));
   }

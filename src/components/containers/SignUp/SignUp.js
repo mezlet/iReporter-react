@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-for */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from "react";
 import { Link, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
@@ -52,7 +51,6 @@ export class SignUp extends Component {
     const { user } = this.state;
     const { signUp } = this.props;
     const { errors, validUser } = validateUser(user);
-
     if (Object.keys(errors).length) {
       this.setState({ errors });
       return;

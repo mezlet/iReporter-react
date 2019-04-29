@@ -2,6 +2,7 @@ import * as types from "../../actions/action-types";
 
 const initialState = {
   isLoading: false,
+  isAdmin: false,
   isLoggedIn: false,
   success: false,
   user: null,
