@@ -46,3 +46,13 @@ export const showInputError = (inputName, errors) => {
   }
   return null;
 };
+
+export const getFormData = ({ image, location, title, comment, type }) => {
+  const formData = new FormData();
+  formData.set("image", image);
+  formData.set("title", title);
+  formData.set("comment", comment);
+  formData.set("location", location);
+  formData.set("type", type);
+  return formData;
+};

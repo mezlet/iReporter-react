@@ -5,7 +5,7 @@ import React, { Component } from "react";
 import { Link, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
-import { Form, Input, Image, Button, label } from "semantic-ui-react";
+import { Form, Input, Image, Button } from "semantic-ui-react";
 import { registerUser } from "../../../redux/actions/auth/auth-dispatchers";
 import { validateUser, showInputError } from "../../../helpers/helpers";
 

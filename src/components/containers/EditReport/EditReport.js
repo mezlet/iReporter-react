@@ -3,38 +3,37 @@
 /* eslint-disable no-undef */
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import Footer from "../../presentation/Footer/Footer";
 import IncidentForm from "../../presentation/IncidentForm/IncidentForm";
 import withContentHeader from "../../../hoc/withContentHeader";
-import { createIncident } from "../../../redux/actions/incident/incident-dispatchers";
+import {
+  getIncident,
+  updateIncident
+} from "../../../redux/actions/incident/incident-dispatchers";
 
 // eslint-disable-next-line react/prefer-stateless-function
 class CreateReport extends Component {
-  render() {
-    const { createdIncident, createRecord } = this.props;
+  componentDidMount() {
     const {
-      success,
-      incident: { id }
-    } = createdIncident;
-    if (success) {
-      return (
-        <Redirect
-          to={{
-            pathname: `/new-report-view/${id}`,
-            id
-          }}
-        />
-      );
-    }
+      match: {
+        params: { id }
+      },
+      viewIncident
+    } = this.props;
+    viewIncident(id);
+  }
 
+  render() {
+    const { incident, updateRecord } = this.props;
     return (
       <div>
         <div className="record-form-container">
           <h2>Report an Incident</h2>
           <IncidentForm
-            incident={createdIncident}
-            createRecord={createRecord}
+            incident={incident}
+            mode="edit"
+            updateRecord={updateRecord}
           />
         </div>
         <Footer />
@@ -42,9 +41,9 @@ class CreateReport extends Component {
     );
   }
 }
-const mapStateToProps = state => ({ createdIncident: state.incident });
+const mapStateToProps = state => ({ incident: state.getIncident });
 const connectIncident = connect(
   mapStateToProps,
-  { createRecord: createIncident }
+  { viewIncident: getIncident, updateRecord: updateIncident }
 )(withRouter(withContentHeader(CreateReport)));
 export default connectIncident;
