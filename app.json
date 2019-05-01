@@ -1,17 +1,13 @@
 {
-  "addons": [
-
-  ],
-  "buildpacks": [
-
-  ],
+  "addons": [],
+  "buildpacks": [],
   "env": {
-    "require": true
+    "API_BASE_URL": {
+      "required": true
+    }
   },
-  "formation": {
-  },
+  "formation": {},
   "name": "iReporter-react",
-  "scripts": {
-  },
+  "scripts": {},
   "stack": "heroku-18"
 }
