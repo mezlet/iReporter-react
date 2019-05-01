@@ -5,18 +5,14 @@ import { Link } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
 import { logoutUser } from "../../../redux/actions/auth/auth-dispatchers";
 
+const logo =
+  "https://res.cloudinary.com/do01bfhpw/image/upload/v1556721799/logo.png";
 const ContentHeader = props => {
   const { isLoggedIn, logout } = props;
   return (
     <Menu borderless className="homeheader-container">
       <Menu.Item>
-        <Image
-          src="../../../../public/images/logo.png"
-          alt=""
-          className="logo"
-          as={Link}
-          to="/"
-        />
+        <Image src={logo} alt="" className="logo" as={Link} to="/" />
       </Menu.Item>
       {isLoggedIn ? (
         <Menu.Menu position="right">
