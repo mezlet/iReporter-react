@@ -2,9 +2,11 @@ import React from "react";
 import { Image } from "semantic-ui-react";
 
 const HomeBanner = () => {
+  const landinImage =
+    "https://res.cloudinary.com/do01bfhpw/image/upload/v1556721799/landing.png";
   return (
     <div className="home-banner-container">
-      <Image src="../../../../public/images/landing.png" className="landing" />
+      <Image src={landinImage} className="landing" />
 
       <h3 className="tip1">Let's Make a Better Nation</h3>
       <p className="tip2">
