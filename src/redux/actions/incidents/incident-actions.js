@@ -13,3 +13,43 @@ export const viewIncidentFailure = payload => ({
   type: types.VIEWINCIDENT_FAILURE,
   payload
 });
+
+export const viewRedFlagStart = () => ({
+  type: types.VIEW_REDFLAG_START
+});
+
+export const viewRedFlagSuccess = payload => ({
+  type: types.VIEW_REDFLAG_SUCCESS,
+  payload
+});
+
+export const viewRedFlagFailure = payload => ({
+  type: types.VIEW_REDFLAG_FAILURE,
+  payload
+});
+export const viewInterventionStart = () => ({
+  type: types.VIEW_INTERVENTION_START
+});
+
+export const viewInterventionSuccess = payload => ({
+  type: types.VIEW_INTERVENTION_SUCCESS,
+  payload
+});
+
+export const viewInterventionFailure = payload => ({
+  type: types.VIEW_INTERVENTION_FAILURE,
+  payload
+});
+export const viewUserIncidentStart = () => ({
+  type: types.VIEW_USER_INCIDENT_START
+});
+
+export const viewUserIncidentSuccess = payload => ({
+  type: types.VIEW_USER_INCIDENT_SUCCESS,
+  payload
+});
+
+export const viewUserIncidentFailure = payload => ({
+  type: types.VIEW_USER_INCIDENT_FAILURE,
+  payload
+});

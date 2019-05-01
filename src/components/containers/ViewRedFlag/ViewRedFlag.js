@@ -6,12 +6,12 @@ import { Card, Image } from "semantic-ui-react";
 import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import withContentHeader from "../../../hoc/withContentHeader";
-import { viewAllIncident } from "../../../redux/actions/incidents/incident-dispatchers";
+import { viewRedFlag } from "../../../redux/actions/incidents/incident-dispatchers";
 
-class ViewIncident extends Component {
+class ViewRedFlag extends Component {
   componentDidMount() {
-    const { viewRecords } = this.props;
-    viewRecords();
+    const { AllRedFlag } = this.props;
+    AllRedFlag();
   }
 
   render() {
@@ -56,6 +56,6 @@ class ViewIncident extends Component {
 const mapStateToProps = state => ({ incident: state.viewIncident });
 const connectIncident = connect(
   mapStateToProps,
-  { viewRecords: viewAllIncident }
-)(withRouter(withContentHeader(ViewIncident)));
+  { AllRedFlag: viewRedFlag }
+)(withRouter(withContentHeader(ViewRedFlag)));
 export default connectIncident;

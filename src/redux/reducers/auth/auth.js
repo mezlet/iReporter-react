@@ -2,7 +2,6 @@ import * as types from "../../actions/action-types";
 
 const initialState = {
   isLoading: false,
-  isAdmin: false,
   isLoggedIn: false,
   success: false,
   user: null,
@@ -22,6 +21,7 @@ const authReducer = (state = initialState, action) => {
     case types.REGISTER_SUCCESS:
       return {
         ...state,
+        isLoading: false,
         success: true,
         isLoggedIn: true,
         message: action.payload.message,
@@ -33,10 +33,18 @@ const authReducer = (state = initialState, action) => {
     case types.REGISTER_FAILURE:
       return {
         ...state,
+        isLoading: false,
         errors: {
           ...action.payload
         }
       };
+
+    case types.LOGOUT:
+      return {
+        ...initialState
+      };
+    case types.CLEAR_AUTH_ERROR:
+      return { ...state, errors: {}, message: "" };
 
     default:
       return state;

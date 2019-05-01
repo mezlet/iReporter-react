@@ -1,12 +1,14 @@
+#root {
+  padding: 15px;
+}
 .login-container {
-  width: 350px;
-  margin: 10% 35% 10% 35%;
+  max-width: 350px;
+  margin: 30px auto;
   background-color: #ffffff;
   border: 2px solid rgba(253, 248, 248, 0.637);
   box-shadow: 5px 4px 3px 4px #dbd9d9;
   h3 {
     text-align: center;
-    // color: #000033;
     padding: 2%;
   }
   p {

@@ -1,3 +1,7 @@
+import jwt from "jsonwebtoken";
+import store from "../store/store";
+import * as action from "../redux/actions/auth/auth-actions";
+
 const handleConfirmPassword = (password, confirmPassword) => {
   if (password !== confirmPassword) {
     return "password doesn't match";
@@ -45,4 +49,53 @@ export const showInputError = (inputName, errors) => {
     return errors[inputName];
   }
   return null;
+};
+
+export const getFormData = ({ image, location, title, comment, type }) => {
+  const formData = new FormData();
+  formData.set("image", image);
+  formData.set("title", title);
+  formData.set("comment", comment);
+  formData.set("location", location);
+  formData.set("type", type);
+  return formData;
+};
+
+/**
+ * Verifies that a JWT token is valid
+ * @param {string} token
+ * @returns {boolean} validity
+ */
+export const verifyToken = token => {
+  try {
+    const decoded = jwt.decode(token);
+    const currentTime = Date.now() / 1000;
+    return decoded.exp >= currentTime;
+  } catch (e) {
+    return false;
+  }
+};
+
+/**
+ * @returns {undefined}
+ */
+export const checkAuth = async () => {
+  const token = localStorage.getItem("token");
+  const validToken = verifyToken(token);
+  if (validToken) {
+    const user = JSON.parse(localStorage.getItem("user"));
+    store.dispatch(
+      action.loginSuccess({
+        message: "authentication successful",
+        data: [
+          {
+            user
+          }
+        ]
+      })
+    );
+  } else {
+    localStorage.removeItem("token");
+    store.dispatch(action.logoutAction());
+  }
 };

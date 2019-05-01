@@ -5,12 +5,19 @@ import { Link, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import { Form, Input, Image, Button } from "semantic-ui-react";
-import { registerUser } from "../../../redux/actions/auth/auth-dispatchers";
+import PropTypes from "prop-types";
+import {
+  registerUser,
+  clearError
+} from "../../../redux/actions/auth/auth-dispatchers";
 import { validateUser, showInputError } from "../../../helpers/helpers";
 
+/**
+ * @description renders SignUp component
+ * @param { object } props
+ * @returns { JSX.Element } SignUp
+ */
 export class SignUp extends Component {
-  static propTypes = {};
-
   state = {
     user: {
       firstname: "",
@@ -22,17 +29,27 @@ export class SignUp extends Component {
       confirmPassword: "",
       username: ""
     },
-
     errors: {}
   };
 
-  componentDidUpdate({ auth: { message: prevMessage } }) {
+  /**
+   * @description renders SignUp component
+   * @param {prevProps} prevProps
+   * @returns { object, string} errors, message
+   */
+  componentDidUpdate(prevProps) {
     const {
-      auth: { message }
+      auth: { errors, message },
+      clearErrorMessage
     } = this.props;
+    if (errors.message !== prevProps.auth.errors.message) {
+      toast.error(errors.message);
+      clearErrorMessage();
+    }
 
-    if (prevMessage !== message) {
+    if (prevProps.auth.message !== message) {
       toast.success(message);
+      clearErrorMessage();
     }
   }
 
@@ -71,6 +88,7 @@ export class SignUp extends Component {
       username
     } = user;
     const { auth } = this.props;
+    const { isLoading } = auth;
     if (auth.success) {
       return <Redirect to="/create" />;
     }
@@ -179,7 +197,13 @@ export class SignUp extends Component {
               {showInputError("confirmPassword", errors)}
             </span>
           </Form.Field>
-          <Button className="logform_btn">Sign up</Button>
+          {isLoading ? (
+            <Button className="logform_btn" loading basic>
+              loading
+            </Button>
+          ) : (
+            <Button className="logform_btn">Sign up</Button>
+          )}
         </Form>
         <p className="form_extra">
           Already have an account? <Link to="/login">Sign in</Link>
@@ -188,10 +212,22 @@ export class SignUp extends Component {
     );
   }
 }
+SignUp.propTypes = {
+  auth: PropTypes.shape({
+    errors: PropTypes.shape({
+      message: PropTypes.string
+    }),
+    message: PropTypes.string,
+    isLoading: PropTypes.bool
+  }).isRequired,
+  clearErrorMessage: PropTypes.func.isRequired,
+  signUp: PropTypes.func.isRequired
+};
+
 const routeSignup = withRouter(SignUp);
 const mapStateToProps = state => ({ auth: state.auth });
 const connectSignup = connect(
   mapStateToProps,
-  { signUp: registerUser }
+  { signUp: registerUser, clearErrorMessage: clearError }
 )(routeSignup);
 export default connectSignup;

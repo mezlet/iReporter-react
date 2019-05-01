@@ -6,12 +6,12 @@ import { Card, Image } from "semantic-ui-react";
 import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import withContentHeader from "../../../hoc/withContentHeader";
-import { viewAllIncident } from "../../../redux/actions/incidents/incident-dispatchers";
+import { viewIntervention } from "../../../redux/actions/incidents/incident-dispatchers";
 
-class ViewIncident extends Component {
+class Viewintervention extends Component {
   componentDidMount() {
-    const { viewRecords } = this.props;
-    viewRecords();
+    const { AllIntervention } = this.props;
+    AllIntervention();
   }
 
   render() {
@@ -56,6 +56,6 @@ class ViewIncident extends Component {
 const mapStateToProps = state => ({ incident: state.viewIncident });
 const connectIncident = connect(
   mapStateToProps,
-  { viewRecords: viewAllIncident }
-)(withRouter(withContentHeader(ViewIncident)));
+  { AllIntervention: viewIntervention }
+)(withRouter(withContentHeader(Viewintervention)));
 export default connectIncident;

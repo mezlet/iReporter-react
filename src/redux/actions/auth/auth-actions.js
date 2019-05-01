@@ -27,3 +27,9 @@ export const registerFailure = payload => ({
   type: types.REGISTER_FAILURE,
   payload
 });
+
+export const logoutAction = () => ({ type: types.LOGOUT });
+
+export const clearErrorAction = () => ({
+  type: types.CLEAR_AUTH_ERROR
+});

@@ -2,25 +2,44 @@
 /* eslint-disable jsx-a11y/label-has-for */
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect, withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import Footer from "../../presentation/Footer/Footer";
 import IncidentForm from "../../presentation/IncidentForm/IncidentForm";
 import withContentHeader from "../../../hoc/withContentHeader";
-import { createIncident } from "../../../redux/actions/incident/incident-dispatchers";
+import {
+  getIncident,
+  updateIncident
+} from "../../../redux/actions/incident/incident-dispatchers";
 
 // eslint-disable-next-line react/prefer-stateless-function
 class CreateReport extends Component {
-  render() {
-    const { createdIncident, createRecord } = this.props;
+  componentDidMount() {
     const {
-      success,
-      incident: { id }
-    } = createdIncident;
+      match: {
+        params: { id }
+      },
+      viewIncident
+    } = this.props;
+    viewIncident(id);
+  }
+
+  render() {
+    const {
+      auth: {
+        user: { id }
+      },
+      updateInfo: {
+        success,
+        incident: { id: incidentId }
+      },
+      incident,
+      updateRecord
+    } = this.props;
     if (success) {
       return (
         <Redirect
           to={{
-            pathname: `/new-report-view/${id}`,
+            pathname: `/new-report-view/${incidentId}`,
             id
           }}
         />
@@ -32,8 +51,10 @@ class CreateReport extends Component {
         <div className="record-form-container">
           <h2>Report an Incident</h2>
           <IncidentForm
-            incident={createdIncident}
-            createRecord={createRecord}
+            incident={incident}
+            mode="edit"
+            updateRecord={updateRecord}
+            userId={id}
           />
         </div>
         <Footer />
@@ -41,9 +62,14 @@ class CreateReport extends Component {
     );
   }
 }
-const mapStateToProps = state => ({ createdIncident: state.incident });
+
+const mapStateToProps = state => ({
+  incident: state.getIncident,
+  auth: state.auth,
+  updateInfo: state.updateIncident
+});
 const connectIncident = connect(
   mapStateToProps,
-  { createRecord: createIncident }
+  { viewIncident: getIncident, updateRecord: updateIncident }
 )(withRouter(withContentHeader(CreateReport)));
 export default connectIncident;
