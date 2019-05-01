@@ -1,19 +1,19 @@
 /* eslint-disable jsx-a11y/label-has-for */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { Component } from "react";
-import { Link, withRouter, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import { toast } from "react-toastify";
-import { Form, Input, Image, Button } from "semantic-ui-react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import { Link, withRouter, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
+import { Form, Input, Image, Button } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 import {
   registerUser,
   clearError
-} from "../../../redux/actions/auth/auth-dispatchers";
-import { validateUser, showInputError } from "../../../helpers/helpers";
+} from '../../../redux/actions/auth/auth-dispatchers';
+import { validateUser, showInputError } from '../../../helpers/helpers';
 
 const logo =
-  "https://res.cloudinary.com/do01bfhpw/image/upload/v1556721799/logo.png";
+  'https://res.cloudinary.com/do01bfhpw/image/upload/v1556721799/logo.png';
 /**
  * @description renders SignUp component
  * @param { object } props
@@ -22,14 +22,14 @@ const logo =
 export class SignUp extends Component {
   state = {
     user: {
-      firstname: "",
-      lastname: "",
-      othernames: "",
-      email: "",
-      phonenumber: "",
-      password: "",
-      confirmPassword: "",
-      username: ""
+      firstname: '',
+      lastname: '',
+      othernames: '',
+      email: '',
+      phonenumber: '',
+      password: '',
+      confirmPassword: '',
+      username: ''
     },
     errors: {}
   };
@@ -108,8 +108,8 @@ export class SignUp extends Component {
               value={firstname}
               onChange={this.handleChange}
             />
-            <span style={{ color: "red" }}>
-              {showInputError("firstname", errors)}
+            <span style={{ color: 'red' }}>
+              {showInputError('firstname', errors)}
             </span>
           </Form.Field>
           <Form.Field required>
@@ -120,8 +120,8 @@ export class SignUp extends Component {
               value={lastname}
               onChange={this.handleChange}
             />
-            <span style={{ color: "red" }}>
-              {showInputError("lastname", errors)}
+            <span style={{ color: 'red' }}>
+              {showInputError('lastname', errors)}
             </span>
           </Form.Field>
           <Form.Field required>
@@ -132,8 +132,8 @@ export class SignUp extends Component {
               value={othernames}
               onChange={this.handleChange}
             />
-            <span style={{ color: "red" }}>
-              {showInputError("othernames", errors)}
+            <span style={{ color: 'red' }}>
+              {showInputError('othernames', errors)}
             </span>
           </Form.Field>
           <Form.Field required>
@@ -144,8 +144,8 @@ export class SignUp extends Component {
               value={email}
               onChange={this.handleChange}
             />
-            <span style={{ color: "red" }}>
-              {showInputError("email", errors)}
+            <span style={{ color: 'red' }}>
+              {showInputError('email', errors)}
             </span>
           </Form.Field>
           <Form.Field required>
@@ -156,8 +156,8 @@ export class SignUp extends Component {
               value={phonenumber}
               onChange={this.handleChange}
             />
-            <span style={{ color: "red" }}>
-              {showInputError("phonenumber", errors)}
+            <span style={{ color: 'red' }}>
+              {showInputError('phonenumber', errors)}
             </span>
           </Form.Field>
           <Form.Field required>
@@ -168,8 +168,8 @@ export class SignUp extends Component {
               value={username}
               onChange={this.handleChange}
             />
-            <span style={{ color: "red" }}>
-              {showInputError("username", errors)}
+            <span style={{ color: 'red' }}>
+              {showInputError('username', errors)}
             </span>
           </Form.Field>
           <Form.Field required>
@@ -180,8 +180,8 @@ export class SignUp extends Component {
               value={password}
               onChange={this.handleChange}
             />
-            <span style={{ color: "red" }}>
-              {showInputError("password", errors)}
+            <span style={{ color: 'red' }}>
+              {showInputError('password', errors)}
             </span>
           </Form.Field>
           <Form.Field required>
@@ -192,8 +192,8 @@ export class SignUp extends Component {
               value={confirmPassword}
               onChange={this.handleChange}
             />
-            <span style={{ color: "red" }}>
-              {showInputError("confirmPassword", errors)}
+            <span style={{ color: 'red' }}>
+              {showInputError('confirmPassword', errors)}
             </span>
           </Form.Field>
           {isLoading ? (

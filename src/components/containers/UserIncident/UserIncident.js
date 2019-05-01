@@ -1,14 +1,15 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/label-has-for */
-import React, { Component } from "react";
-import { Table, Icon, Modal, Button } from "semantic-ui-react";
-import { withRouter, Link } from "react-router-dom";
-import { connect } from "react-redux";
-import withContentHeader from "../../../hoc/withContentHeader";
-import { viewUserIncident } from "../../../redux/actions/incidents/incident-dispatchers";
-import { deleteUserIncident } from "../../../redux/actions/incident/incident-dispatchers";
+import React, { Component } from 'react';
+import { Table, Icon, Modal, Button } from 'semantic-ui-react';
+import { withRouter, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import withContentHeader from '../../../hoc/withContentHeader';
+import { viewUserIncident } from '../../../redux/actions/incidents/incident-dispatchers';
+import { deleteUserIncident } from '../../../redux/actions/incident/incident-dispatchers';
 
-class UserIncident extends Component {
+export class UserIncident extends Component {
   componentDidMount() {
     const { listUserIncident } = this.props;
     listUserIncident();
@@ -71,11 +72,11 @@ class UserIncident extends Component {
                       content="Are you sure you want to delete this incident?"
                       onActionClick={() => this.handleDelete(incident.id)}
                       actions={[
-                        "No",
+                        'No',
 
                         {
-                          key: "done",
-                          content: "Yes",
+                          key: 'done',
+                          content: 'Yes',
                           positive: true
                         }
                       ]}
@@ -107,6 +108,20 @@ class UserIncident extends Component {
     );
   }
 }
+
+UserIncident.propTypes = {
+  listUserIncident: PropTypes.func.isRequired,
+  deletedIncident: PropTypes.shape({
+    success: PropTypes.bool
+  }),
+  deleteIncident: PropTypes.func.isRequired,
+  history: PropTypes.shape(),
+  incidents: PropTypes.shape({
+    data: PropTypes.shape(),
+    isLoading: PropTypes.bool
+  })
+};
+
 const mapStateToProps = state => ({
   incidents: state.viewIncident,
   deletedIncident: state.deleteIncident

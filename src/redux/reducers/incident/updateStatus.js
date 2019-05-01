@@ -1,11 +1,11 @@
-import * as types from "../../actions/action-types";
+import * as types from '../../actions/action-types';
 
 const initialState = {
   isLoading: false,
   success: false,
   status: {},
   errors: {},
-  message: ""
+  message: ''
 };
 
 const updateStatusReducer = (state = initialState, action) => {
@@ -16,7 +16,6 @@ const updateStatusReducer = (state = initialState, action) => {
         isLoading: true
       };
     case types.UPDATE_INCIDENT_STATUS_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         success: true,

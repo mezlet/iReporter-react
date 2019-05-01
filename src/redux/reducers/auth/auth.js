@@ -1,4 +1,4 @@
-import * as types from "../../actions/action-types";
+import * as types from '../../actions/action-types';
 
 const initialState = {
   isLoading: false,
@@ -6,7 +6,7 @@ const initialState = {
   success: false,
   user: null,
   errors: {},
-  message: ""
+  message: ''
 };
 
 const authReducer = (state = initialState, action) => {
@@ -44,7 +44,7 @@ const authReducer = (state = initialState, action) => {
         ...initialState
       };
     case types.CLEAR_AUTH_ERROR:
-      return { ...state, errors: {}, message: "" };
+      return { ...state, errors: {}, message: '' };
 
     default:
       return state;

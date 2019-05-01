@@ -1,14 +1,15 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/label-has-for */
 /* eslint-disable no-undef */
-import React, { Component } from "react";
-import { Card, Image } from "semantic-ui-react";
-import { withRouter, Link } from "react-router-dom";
-import { connect } from "react-redux";
-import withContentHeader from "../../../hoc/withContentHeader";
-import { viewIntervention } from "../../../redux/actions/incidents/incident-dispatchers";
+import React, { Component } from 'react';
+import { Card, Image } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
+import { withRouter, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import withContentHeader from '../../../hoc/withContentHeader';
+import { viewIntervention } from '../../../redux/actions/incidents/incident-dispatchers';
 
-class Viewintervention extends Component {
+export class Viewintervention extends Component {
   componentDidMount() {
     const { AllIntervention } = this.props;
     AllIntervention();
@@ -53,6 +54,12 @@ class Viewintervention extends Component {
     );
   }
 }
+Viewintervention.propTypes = {
+  incident: PropTypes.shape({
+    data: PropTypes.shape()
+  }),
+  AllIntervention: PropTypes.func.isRequired
+};
 const mapStateToProps = state => ({ incident: state.viewIncident });
 const connectIncident = connect(
   mapStateToProps,

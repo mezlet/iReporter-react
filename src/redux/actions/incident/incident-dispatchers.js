@@ -1,6 +1,6 @@
-import axios from "axios";
-import * as actions from "./incident-actions";
-import { getFormData } from "../../../helpers/helpers";
+import axios from 'axios';
+import * as actions from './incident-actions';
+import { getFormData } from '../../../helpers/helpers';
 
 const baseUrl = `${process.env.API_BASE_URL}/incident`;
 
@@ -9,7 +9,7 @@ export const createIncident = data => async dispatch => {
   dispatch(actions.createIncidentStart());
   try {
     const res = await axios.post(`${baseUrl}`, incidentData, {
-      headers: { "x-access-token": localStorage.getItem("token") }
+      headers: { 'x-access-token': localStorage.getItem('token') }
     });
 
     dispatch(actions.createIncidentSuccess(res.data.data[0]));
@@ -23,7 +23,7 @@ export const getIncident = data => async dispatch => {
   dispatch(actions.getIncidentStart());
   try {
     const res = await axios.get(`${baseUrl}/${id}`, {
-      headers: { "x-access-token": localStorage.getItem("token") }
+      headers: { 'x-access-token': localStorage.getItem('token') }
     });
     dispatch(actions.getIncidentSuccess(res.data.data));
     dispatch(actions.clearSuccess());
@@ -38,7 +38,7 @@ export const updateIncident = data => async dispatch => {
   dispatch(actions.updateIncidentStart());
   try {
     const res = await axios.put(`${baseUrl}/${data.id}`, incidentData, {
-      headers: { "x-access-token": localStorage.getItem("token") }
+      headers: { 'x-access-token': localStorage.getItem('token') }
     });
     dispatch(actions.updateIncidentSuccess(res.data.data));
   } catch (errors) {
@@ -51,7 +51,7 @@ export const deleteUserIncident = data => async dispatch => {
   dispatch(actions.deleteUserIncidentStart());
   try {
     const res = await axios.delete(`${baseUrl}/${id}`, {
-      headers: { "x-access-token": localStorage.getItem("token") }
+      headers: { 'x-access-token': localStorage.getItem('token') }
     });
     dispatch(actions.deleteUserIncidentSuccess(res.data));
   } catch (errors) {
@@ -65,7 +65,7 @@ export const updateStatusAction = data => async dispatch => {
   dispatch(actions.updateIncidentStatusStart());
   try {
     const res = await axios.put(`${baseUrl}/${id}/status`, newstatus, {
-      headers: { "x-access-token": localStorage.getItem("token") }
+      headers: { 'x-access-token': localStorage.getItem('token') }
     });
     dispatch(actions.updateIncidentStatusSuccess(res.data));
     dispatch(actions.clearSuccess());

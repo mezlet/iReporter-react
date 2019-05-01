@@ -1,15 +1,16 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/label-has-for */
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Redirect, withRouter } from "react-router-dom";
-import Footer from "../../presentation/Footer/Footer";
-import IncidentForm from "../../presentation/IncidentForm/IncidentForm";
-import withContentHeader from "../../../hoc/withContentHeader";
-import { createIncident } from "../../../redux/actions/incident/incident-dispatchers";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Redirect, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import Footer from '../../presentation/Footer/Footer';
+import IncidentForm from '../../presentation/IncidentForm/IncidentForm';
+import withContentHeader from '../../../hoc/withContentHeader';
+import { createIncident } from '../../../redux/actions/incident/incident-dispatchers';
 
 // eslint-disable-next-line react/prefer-stateless-function
-class CreateReport extends Component {
+export class CreateReport extends Component {
   render() {
     const { createdIncident, createRecord } = this.props;
     const {
@@ -41,6 +42,15 @@ class CreateReport extends Component {
     );
   }
 }
+CreateReport.propTypes = {
+  createdIncident: PropTypes.shape({
+    success: PropTypes.bool,
+    incident: PropTypes.shape({
+      id: PropTypes.string
+    })
+  }).isRequired,
+  createRecord: PropTypes.func.isRequired
+};
 const mapStateToProps = state => ({ createdIncident: state.incident });
 const connectIncident = connect(
   mapStateToProps,

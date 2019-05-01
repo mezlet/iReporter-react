@@ -1,4 +1,4 @@
-import * as types from "../../actions/action-types";
+import * as types from '../../actions/action-types';
 
 const initialState = {
   isLoading: false,
@@ -6,7 +6,7 @@ const initialState = {
   success: false,
   data: [],
   errors: {},
-  message: ""
+  message: ''
 };
 
 const viewIncidentReducer = (state = initialState, action) => {

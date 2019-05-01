@@ -1,11 +1,12 @@
-import { combineReducers } from "redux";
-import auth from "./auth/auth";
-import incident from "./incident/incident";
-import getIncident from "./incident/getIncident";
-import updateIncident from "./incident/updateIncident";
-import deleteIncident from "./incident/deleteIncident";
-import viewIncident from "./incidents/viewIncident";
-import updateStatus from "./incident/updateStatus";
+import { combineReducers } from 'redux';
+import auth from './auth/auth';
+import incident from './incident/incident';
+import getIncident from './incident/getIncident';
+import updateIncident from './incident/updateIncident';
+import deleteIncident from './incident/deleteIncident';
+import viewIncident from './incidents/viewIncident';
+import updateStatus from './incident/updateStatus';
+import getProfile from './incident/getProfile';
 
 export default combineReducers({
   auth,
@@ -14,5 +15,6 @@ export default combineReducers({
   updateIncident,
   viewIncident,
   deleteIncident,
-  updateStatus
+  updateStatus,
+  getProfile
 });

@@ -1,4 +1,4 @@
-import * as types from "../action-types";
+import * as types from '../action-types';
 
 export const viewIncidentStart = () => ({
   type: types.VIEWINCIDENT_START
@@ -51,5 +51,18 @@ export const viewUserIncidentSuccess = payload => ({
 
 export const viewUserIncidentFailure = payload => ({
   type: types.VIEW_USER_INCIDENT_FAILURE,
+  payload
+});
+export const getProfileStart = () => ({
+  type: types.GET_USER_PROFILE_START
+});
+
+export const getProfileSuccess = payload => ({
+  type: types.GET_USER_PROFILE_SUCCESS,
+  payload
+});
+
+export const getProfileFailure = payload => ({
+  type: types.GET_USER_PROFILE_FAILURE,
   payload
 });
