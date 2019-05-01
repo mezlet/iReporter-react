@@ -12,6 +12,8 @@ import {
 } from "../../../redux/actions/auth/auth-dispatchers";
 import { validateUser, showInputError } from "../../../helpers/helpers";
 
+const logo =
+  "https://res.cloudinary.com/do01bfhpw/image/upload/v1556721799/logo.png";
 /**
  * @description renders SignUp component
  * @param { object } props
@@ -94,10 +96,7 @@ export class SignUp extends Component {
     }
     return (
       <div className="signup-container">
-        <Image
-          src="../../../../public/images/logo.png"
-          className="signup-image"
-        />
+        <Image src={logo} className="signup-image" />
         <h3>Create your iReport Account</h3>
 
         <Form className="signup-form" onSubmit={this.handleSubmit}>

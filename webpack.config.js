@@ -1,9 +1,8 @@
 const path = require("path");
-// const StyleLintPlugin = require("stylelint-webpack-plugin");
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const dotenv = require("dotenv");
-const Dotenv = require("dotenv-webpack");
 
 dotenv.config();
 module.exports = {
@@ -50,7 +49,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./public/index.html"
     }),
-    new Dotenv()
+    new webpack.EnvironmentPlugin(["NODE_ENV", "API_BASE_URL"])
   ],
   resolve: {
     extensions: [".js", ".jsx"]
