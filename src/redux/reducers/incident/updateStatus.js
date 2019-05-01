@@ -3,19 +3,20 @@ import * as types from "../../actions/action-types";
 const initialState = {
   isLoading: false,
   success: false,
-  incident: {},
+  status: {},
   errors: {},
   message: ""
 };
 
-const updateIncidentReducer = (state = initialState, action) => {
+const updateStatusReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.UPDATE_INCIDENT_START:
+    case types.UPDATE_INCIDENT_STATUS_START:
       return {
         ...state,
         isLoading: true
       };
-    case types.UPDATE_INCIDENT_SUCCESS:
+    case types.UPDATE_INCIDENT_STATUS_SUCCESS:
+      console.log(action.payload);
       return {
         ...state,
         success: true,
@@ -29,7 +30,7 @@ const updateIncidentReducer = (state = initialState, action) => {
         ...state,
         success: false
       };
-    case types.UPDATE_INCIDENT_FAILURE:
+    case types.UPDATE_INCIDENT_STATUS_FAILURE:
       return {
         ...state,
         errors: {
@@ -42,4 +43,4 @@ const updateIncidentReducer = (state = initialState, action) => {
   }
 };
 
-export default updateIncidentReducer;
+export default updateStatusReducer;

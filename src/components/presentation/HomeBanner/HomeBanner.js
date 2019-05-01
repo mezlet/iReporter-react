@@ -3,7 +3,7 @@ import { Image } from "semantic-ui-react";
 
 const HomeBanner = () => {
   return (
-    <div>
+    <div className="home-banner-container">
       <Image src="../../../../public/images/landing.png" className="landing" />
 
       <h3 className="tip1">Let's Make a Better Nation</h3>

@@ -1,6 +1,13 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from "react";
-import { Card, Image, Button } from "semantic-ui-react";
+import {
+  Card,
+  Image,
+  Button,
+  Dimmer,
+  Loader,
+  Segment
+} from "semantic-ui-react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import withContentHeader from "../../../hoc/withContentHeader";
@@ -20,11 +27,34 @@ class NewReportView extends Component {
   render() {
     const {
       incident: { incident },
-      isLoading
+      isLoading,
+      auth: { user }
     } = this.props;
-    const { id, title, type, comment, images, createdon, location } = incident;
+    const userId = user.id;
+    const {
+      id,
+      createdby,
+      title,
+      type,
+      comment,
+      images,
+      createdon,
+      location
+    } = incident;
+    const isUser = userId === createdby;
     if (isLoading) {
-      return <div>Loading....</div>;
+      return (
+        <div>
+          {" "}
+          <Segment>
+            <Dimmer active inverted>
+              <Loader inverted>Loading</Loader>
+            </Dimmer>
+
+            <Image src="https://react.semantic-ui.com/images/wireframe/short-paragraph.png" />
+          </Segment>
+        </div>
+      );
     }
 
     return (
@@ -44,18 +74,27 @@ class NewReportView extends Component {
               <span className="date">Created: {createdon}</span>
             </Card.Meta>
           </Card.Content>
-          <Card.Content extra>
-            <div className="ui two buttons" />
-            <Button basic as={Link} to={`/edit-incident/${id}`}>
-              Edit
-            </Button>
-          </Card.Content>
+          {isUser && (
+            <Card.Content extra>
+              <div className="ui two buttons" />
+              <Button
+                basic
+                as={Link}
+                to={{ pathname: `/edit-incident/${id}`, isEdit: "no" }}
+              >
+                Edit
+              </Button>
+            </Card.Content>
+          )}
         </Card>
       </div>
     );
   }
 }
-const mapStateToProps = state => ({ incident: state.getIncident });
+const mapStateToProps = state => ({
+  incident: state.getIncident,
+  auth: state.auth
+});
 const connectIncident = connect(
   mapStateToProps,
   { viewIncident: getIncident }

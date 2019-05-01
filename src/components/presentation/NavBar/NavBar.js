@@ -8,20 +8,20 @@ const NavBar = () => {
       <nav className="navbar">
         <ul>
           <li>
-            <Icon name="plus" />
             <Link to="/create" className="nav-link">
+              <Icon name="plus" />
               New Report
             </Link>
           </li>
           <li>
-            <Icon name="book" />
             <Link to="/record" className="nav-link">
+              <Icon name="book" />
               my Record
             </Link>
           </li>
           <li>
-            <Icon name="user" />
             <Link to="/profile" className="nav-link">
+              <Icon name="user" />
               Profile
             </Link>
           </li>
@@ -46,8 +46,10 @@ const NavBar = () => {
             </Dropdown>
           </li>
           <li>
-            <Icon name="sign-out" />
-            Sign out
+            <Link to="/logout" className="nav-link">
+              <Icon name="sign-out" />
+              Sign out
+            </Link>
           </li>
         </ul>
       </nav>

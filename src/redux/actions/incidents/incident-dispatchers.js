@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as actions from "./incident-actions";
 
-const baseUrl = "http://localhost:8800/api/v1";
+const baseUrl = `${process.env.API_BASE_URL}`;
 
 export const viewAllIncident = () => async dispatch => {
   dispatch(actions.viewIncidentStart());
@@ -36,5 +36,17 @@ export const viewIntervention = () => async dispatch => {
     dispatch(actions.viewInterventionSuccess(res.data.data));
   } catch (errors) {
     dispatch(actions.viewInterventionFailure(errors));
+  }
+};
+
+export const viewUserIncident = () => async dispatch => {
+  dispatch(actions.viewUserIncidentStart());
+  try {
+    const res = await axios.get(`${baseUrl}/incident/me`, {
+      headers: { "x-access-token": localStorage.getItem("token") }
+    });
+    dispatch(actions.viewUserIncidentSuccess(res.data.data));
+  } catch (errors) {
+    dispatch(actions.viewUserIncidentFailure(errors));
   }
 };

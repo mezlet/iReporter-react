@@ -1,16 +1,17 @@
-const path = require('path');
+const path = require("path");
 // const StyleLintPlugin = require("stylelint-webpack-plugin");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
+const Dotenv = require("dotenv-webpack");
 
 dotenv.config();
 module.exports = {
-  entry: './src/index.js',
+  entry: "./src/index.js",
   output: {
-    filename: 'bundle.js',
-    path: path.join(__dirname, 'build'),
-    publicPath: '/'
+    filename: "bundle.js",
+    path: path.join(__dirname, "build"),
+    publicPath: "/"
   },
   module: {
     rules: [
@@ -18,28 +19,28 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
+          loader: "babel-loader"
         }
       },
       {
         test: /\.(png|jpg|gif|jpeg)$/,
         use: {
-          loader: 'file-loader'
+          loader: "file-loader"
         }
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ["style-loader", "css-loader"]
       },
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: ["style-loader", "css-loader", "sass-loader"]
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
         use: [
           {
-            loader: 'url-loader'
+            loader: "url-loader"
           }
         ]
       }
@@ -47,18 +48,12 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './public/index.html'
-    })
-    // new StyleLintPlugin({
-    //   configFile: ".stylelintrc",
-    //   context: "src",
-    //   files: "**/*.scss",
-    //   failOnError: false,
-    //   quiet: false
-    // })
+      template: "./public/index.html"
+    }),
+    new Dotenv()
   ],
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: [".js", ".jsx"]
   },
   devServer: {
     historyApiFallback: true
