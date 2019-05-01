@@ -11,8 +11,6 @@ import {
   clearError
 } from "../../../redux/actions/auth/auth-dispatchers";
 
-const logo =
-  "https://res.cloudinary.com/do01bfhpw/image/upload/v1556721799/logo.png";
 export class Login extends Component {
   state = {
     user: {
@@ -70,7 +68,10 @@ export class Login extends Component {
 
     return (
       <div className="login-container">
-        <Image src={logo} className="signup-image" />
+        <Image
+          src="../../../../public/images/logo.png"
+          className="signup-image"
+        />
         <h3> Welcome Back !!!</h3>
         <Form className="signup-form" onSubmit={this.handleSubmit}>
           <Form.Field required>
