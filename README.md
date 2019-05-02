@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/mezlet/iReporter-react.svg?branch=develop)](https://travis-ci.org/mezlet/iReporter-react)
+[![Build Status](https://travis-ci.org/mezlet/iReporter-react.svg?branch=develop)](https://travis-ci.org/mezlet/iReporter-react) [![Test Coverage](https://api.codeclimate.com/v1/badges/be62ccd0616193e9883d/test_coverage)](https://codeclimate.com/github/mezlet/iReporter-react/test_coverage)
 
 iReporter-React
 
