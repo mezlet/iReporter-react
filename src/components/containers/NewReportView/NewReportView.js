@@ -1,5 +1,5 @@
 /* eslint-disable react/prefer-stateless-function */
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Card,
   Image,
@@ -7,13 +7,14 @@ import {
   Dimmer,
   Loader,
   Segment
-} from "semantic-ui-react";
-import { Link, withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import withContentHeader from "../../../hoc/withContentHeader";
-import { getIncident } from "../../../redux/actions/incident/incident-dispatchers";
+} from 'semantic-ui-react';
+import { Link, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import withContentHeader from '../../../hoc/withContentHeader';
+import { getIncident } from '../../../redux/actions/incident/incident-dispatchers';
 
-class NewReportView extends Component {
+export class NewReportView extends Component {
   componentDidMount() {
     const {
       match: {
@@ -45,7 +46,7 @@ class NewReportView extends Component {
     if (isLoading) {
       return (
         <div>
-          {" "}
+          {' '}
           <Segment>
             <Dimmer active inverted>
               <Loader inverted>Loading</Loader>
@@ -80,7 +81,7 @@ class NewReportView extends Component {
               <Button
                 basic
                 as={Link}
-                to={{ pathname: `/edit-incident/${id}`, isEdit: "no" }}
+                to={{ pathname: `/edit-incident/${id}`, isEdit: 'no' }}
               >
                 Edit
               </Button>
@@ -91,6 +92,23 @@ class NewReportView extends Component {
     );
   }
 }
+
+NewReportView.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string
+    })
+  }),
+  incident: PropTypes.shape({
+    incident: PropTypes.shape()
+  }),
+  auth: PropTypes.shape({
+    user: PropTypes.shape()
+  }),
+  isLoading: PropTypes.bool,
+  viewIncident: PropTypes.func.isRequired
+};
+
 const mapStateToProps = state => ({
   incident: state.getIncident,
   auth: state.auth

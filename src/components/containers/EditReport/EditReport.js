@@ -1,18 +1,19 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/label-has-for */
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { withRouter, Redirect } from "react-router-dom";
-import Footer from "../../presentation/Footer/Footer";
-import IncidentForm from "../../presentation/IncidentForm/IncidentForm";
-import withContentHeader from "../../../hoc/withContentHeader";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import Footer from '../../presentation/Footer/Footer';
+import IncidentForm from '../../presentation/IncidentForm/IncidentForm';
+import withContentHeader from '../../../hoc/withContentHeader';
 import {
   getIncident,
   updateIncident
-} from "../../../redux/actions/incident/incident-dispatchers";
+} from '../../../redux/actions/incident/incident-dispatchers';
 
 // eslint-disable-next-line react/prefer-stateless-function
-class CreateReport extends Component {
+export class EditReport extends Component {
   componentDidMount() {
     const {
       match: {
@@ -62,6 +63,27 @@ class CreateReport extends Component {
     );
   }
 }
+EditReport.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string
+    })
+  }).isRequired,
+  viewIncident: PropTypes.func,
+  auth: PropTypes.shape({
+    user: PropTypes.shape({
+      id: '1'
+    })
+  }),
+  updateRecord: PropTypes.func,
+  incident: PropTypes.shape(),
+  updateInfo: PropTypes.shape({
+    success: PropTypes.bool,
+    incident: PropTypes.shape({
+      id: PropTypes.string
+    })
+  })
+};
 
 const mapStateToProps = state => ({
   incident: state.getIncident,
@@ -71,5 +93,5 @@ const mapStateToProps = state => ({
 const connectIncident = connect(
   mapStateToProps,
   { viewIncident: getIncident, updateRecord: updateIncident }
-)(withRouter(withContentHeader(CreateReport)));
+)(withRouter(withContentHeader(EditReport)));
 export default connectIncident;

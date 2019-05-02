@@ -1,5 +1,5 @@
-import React, { Fragment } from "react";
-import ContentHeader from "../components/presentation/ContentHeader/ContentHeader";
+import React, { Fragment } from 'react';
+import ContentHeader from '../components/presentation/ContentHeader/ContentHeader';
 
 const withContentHeader = WrappedComponent => {
   // eslint-disable-next-line react/prefer-stateless-function

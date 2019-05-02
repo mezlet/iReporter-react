@@ -1,16 +1,15 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/label-has-for */
-import React, { Component } from "react";
-import { Table, Dropdown } from "semantic-ui-react";
-import { withRouter, Link } from "react-router-dom";
-import { connect } from "react-redux";
-import withContentHeader from "../../../hoc/withContentHeader";
-import { viewAllIncident } from "../../../redux/actions/incidents/incident-dispatchers";
-import { updateStatusAction } from "../../../redux/actions/incident/incident-dispatchers";
+import React, { Component } from 'react';
+import { Table, Dropdown } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import withContentHeader from '../../../hoc/withContentHeader';
+import { viewAllIncident } from '../../../redux/actions/incidents/incident-dispatchers';
+import { updateStatusAction } from '../../../redux/actions/incident/incident-dispatchers';
 
-class AdminPage extends Component {
-  state = {};
-
+export class AdminPage extends Component {
   componentDidMount() {
     const { viewRecords } = this.props;
     viewRecords();
@@ -37,7 +36,6 @@ class AdminPage extends Component {
     const {
       incident: { data, isLoading }
     } = this.props;
-
     return (
       <div className="incident-viewAll-wrapper">
         <Table celled selectable>
@@ -75,14 +73,14 @@ class AdminPage extends Component {
                           value="rejected"
                           text="Reject"
                           onClick={() =>
-                            this.handleSubmit(incident.id, "rejected")
+                            this.handleSubmit(incident.id, 'rejected')
                           }
                         />
                         <Dropdown.Item
                           value="resolved"
                           text="Accept"
                           onClick={() =>
-                            this.handleSubmit(incident.id, "resolved")
+                            this.handleSubmit(incident.id, 'resolved')
                           }
                         />
                         <Dropdown.Item
@@ -91,7 +89,7 @@ class AdminPage extends Component {
                           onClick={() =>
                             this.handleSubmit(
                               incident.id,
-                              "under-investigation"
+                              'under-investigation'
                             )
                           }
                         />
@@ -111,12 +109,23 @@ class AdminPage extends Component {
     );
   }
 }
+AdminPage.propTypes = {
+  updateStatus: PropTypes.shape({
+    success: PropTypes.bool
+  }).isRequired,
+  incident: PropTypes.shape({
+    data: PropTypes.shape(),
+    isLoading: PropTypes.bool
+  }).isRequired,
+  statusUpdate: PropTypes.func.isRequired
+};
 const mapStateToProps = state => ({
   incident: state.viewIncident,
   updateStatus: state.updateStatus
 });
+
 const connectIncident = connect(
   mapStateToProps,
   { viewRecords: viewAllIncident, statusUpdate: updateStatusAction }
-)(withRouter(withContentHeader(AdminPage)));
+)(withContentHeader(AdminPage));
 export default connectIncident;

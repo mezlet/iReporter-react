@@ -1,10 +1,10 @@
-import jwt from "jsonwebtoken";
-import store from "../store/store";
-import * as action from "../redux/actions/auth/auth-actions";
+import jwt from 'jsonwebtoken';
+import store from '../store/store';
+import * as action from '../redux/actions/auth/auth-actions';
 
 const handleConfirmPassword = (password, confirmPassword) => {
   if (password !== confirmPassword) {
-    return "password doesn't match";
+    return 'password doesn\'t match';
   }
   return null;
 };
@@ -21,23 +21,23 @@ export const validateUser = inputFields => {
   }
 
   if (newUser.username.length < 4) {
-    errors.username = "username must be more than four characters";
+    errors.username = 'username must be more than four characters';
   }
 
   if (newUser.firstname.length < 3) {
-    errors.firstname = "firstname must be more than three characters";
+    errors.firstname = 'firstname must be more than three characters';
   }
 
   if (newUser.lastname.length < 4) {
-    errors.lastname = "last must be more than four characters";
+    errors.lastname = 'last must be more than four characters';
   }
 
   if (newUser.othernames.length < 4) {
-    errors.othernames = "othernames must be more than four characters";
+    errors.othernames = 'othernames must be more than four characters';
   }
 
   if (password.length < 4) {
-    errors.password = "password must be more than four characters";
+    errors.password = 'password must be more than four characters';
   }
   const validUser = { ...newUser, password };
 
@@ -53,11 +53,11 @@ export const showInputError = (inputName, errors) => {
 
 export const getFormData = ({ image, location, title, comment, type }) => {
   const formData = new FormData();
-  formData.set("image", image);
-  formData.set("title", title);
-  formData.set("comment", comment);
-  formData.set("location", location);
-  formData.set("type", type);
+  formData.set('image', image);
+  formData.set('title', title);
+  formData.set('comment', comment);
+  formData.set('location', location);
+  formData.set('type', type);
   return formData;
 };
 
@@ -80,13 +80,13 @@ export const verifyToken = token => {
  * @returns {undefined}
  */
 export const checkAuth = async () => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
   const validToken = verifyToken(token);
   if (validToken) {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem('user'));
     store.dispatch(
       action.loginSuccess({
-        message: "authentication successful",
+        message: 'authentication successful',
         data: [
           {
             user
@@ -95,7 +95,7 @@ export const checkAuth = async () => {
       })
     );
   } else {
-    localStorage.removeItem("token");
+    localStorage.removeItem('token');
     store.dispatch(action.logoutAction());
   }
 };

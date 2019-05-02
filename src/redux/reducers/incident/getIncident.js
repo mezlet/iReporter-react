@@ -1,11 +1,11 @@
-import * as types from "../../actions/action-types";
+import * as types from '../../actions/action-types';
 
 const initialState = {
   isLoading: false,
   success: false,
   incident: {},
   errors: {},
-  message: ""
+  message: ''
 };
 
 const getIncidentReducer = (state = initialState, action) => {

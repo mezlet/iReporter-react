@@ -1,23 +1,23 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/label-has-for */
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { toast } from "react-toastify";
-import { Link, withRouter, Redirect } from "react-router-dom";
-import { Form, Input, Image, Button } from "semantic-ui-react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
+import { Link, withRouter, Redirect } from 'react-router-dom';
+import { Form, Input, Image, Button } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 import {
   loginUser,
   clearError
-} from "../../../redux/actions/auth/auth-dispatchers";
+} from '../../../redux/actions/auth/auth-dispatchers';
 
 const logo =
-  "https://res.cloudinary.com/do01bfhpw/image/upload/v1556721799/logo.png";
+  'https://res.cloudinary.com/do01bfhpw/image/upload/v1556721799/logo.png';
 export class Login extends Component {
   state = {
     user: {
-      email: "",
-      password: ""
+      email: '',
+      password: ''
     }
   };
 

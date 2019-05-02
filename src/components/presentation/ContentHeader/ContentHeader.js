@@ -1,12 +1,12 @@
-import React, { Fragment } from "react";
-import { connect } from "react-redux";
-import { Menu, Image, Button } from "semantic-ui-react";
-import { Link } from "react-router-dom";
-import NavBar from "../NavBar/NavBar";
-import { logoutUser } from "../../../redux/actions/auth/auth-dispatchers";
+import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
+import { Menu, Image, Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import NavBar from '../NavBar/NavBar';
+import { logoutUser } from '../../../redux/actions/auth/auth-dispatchers';
 
 const logo =
-  "https://res.cloudinary.com/do01bfhpw/image/upload/v1556721799/logo.png";
+  'https://res.cloudinary.com/do01bfhpw/image/upload/v1556721799/logo.png';
 const ContentHeader = props => {
   const { isLoggedIn, logout } = props;
   return (

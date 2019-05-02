@@ -1,14 +1,15 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/label-has-for */
 /* eslint-disable no-undef */
-import React, { Component } from "react";
-import { Card, Image } from "semantic-ui-react";
-import { withRouter, Link } from "react-router-dom";
-import { connect } from "react-redux";
-import withContentHeader from "../../../hoc/withContentHeader";
-import { viewAllIncident } from "../../../redux/actions/incidents/incident-dispatchers";
+import React, { Component } from 'react';
+import { Card, Image } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
+import { withRouter, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import withContentHeader from '../../../hoc/withContentHeader';
+import { viewAllIncident } from '../../../redux/actions/incidents/incident-dispatchers';
 
-class ViewIncident extends Component {
+export class ViewIncident extends Component {
   componentDidMount() {
     const { viewRecords } = this.props;
     viewRecords();
@@ -53,6 +54,14 @@ class ViewIncident extends Component {
     );
   }
 }
+
+ViewIncident.propTypes = {
+  incident: PropTypes.shape({
+    data: PropTypes.shape()
+  }),
+  viewRecords: PropTypes.func.isRequired
+};
+
 const mapStateToProps = state => ({ incident: state.viewIncident });
 const connectIncident = connect(
   mapStateToProps,

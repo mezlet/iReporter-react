@@ -1,14 +1,15 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/label-has-for */
 /* eslint-disable no-undef */
-import React, { Component } from "react";
-import { Card, Image } from "semantic-ui-react";
-import { withRouter, Link } from "react-router-dom";
-import { connect } from "react-redux";
-import withContentHeader from "../../../hoc/withContentHeader";
-import { viewRedFlag } from "../../../redux/actions/incidents/incident-dispatchers";
+import React, { Component } from 'react';
+import { Card, Image } from 'semantic-ui-react';
+import { withRouter, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import withContentHeader from '../../../hoc/withContentHeader';
+import { viewRedFlag } from '../../../redux/actions/incidents/incident-dispatchers';
 
-class ViewRedFlag extends Component {
+export class ViewRedFlag extends Component {
   componentDidMount() {
     const { AllRedFlag } = this.props;
     AllRedFlag();
@@ -53,6 +54,13 @@ class ViewRedFlag extends Component {
     );
   }
 }
+ViewRedFlag.propTypes = {
+  incident: PropTypes.shape({
+    data: PropTypes.shape()
+  }),
+  AllRedFlag: PropTypes.func.isRequired
+};
+
 const mapStateToProps = state => ({ incident: state.viewIncident });
 const connectIncident = connect(
   mapStateToProps,

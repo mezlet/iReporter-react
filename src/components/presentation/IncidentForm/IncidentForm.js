@@ -1,9 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/label-has-for */
 
-import React, { Component } from "react";
-import jsonForm from "formdata-json";
-import { Form, Button, Image } from "semantic-ui-react";
+import React, { Component } from 'react';
+import jsonForm from 'formdata-json';
+import PropTypes from 'prop-types';
+import { Form, Button, Image } from 'semantic-ui-react';
 
 class IncidentForm extends Component {
   state = {
@@ -16,11 +17,12 @@ class IncidentForm extends Component {
     const reader = new FileReader();
     const file = e.target.files[0];
 
-    reader.onloadend = () => {
+    reader.addEventListener('load', () => {
       this.setState({
         imagePreviewUrl: reader.result
       });
-    };
+    });
+
     reader.readAsDataURL(file);
   };
 
@@ -88,5 +90,12 @@ class IncidentForm extends Component {
     );
   }
 }
+IncidentForm.propTypes = {
+  incident: PropTypes.shape({
+    incident: PropTypes.shape()
+  }),
+  createRecord: PropTypes.func.isRequired,
+  updateRecord: PropTypes.func.isRequired
+};
 
 export default IncidentForm;

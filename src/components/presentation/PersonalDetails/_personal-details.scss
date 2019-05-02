@@ -1,8 +1,8 @@
 .profile-container {
-  padding: 3%;
+  display: flex;
   .profile-table {
-    padding-left: 23%;
-    margin-top: -41%;
+    margin-left: 35px;
+    width: 100%;
   }
   .Header {
     background-color: #000033;
@@ -10,5 +10,11 @@
   .profile-card {
     background-color: #0505cc;
     color: white;
+  }
+  .profile_span {
+    font-size: 13px;
+  }
+  .report_total {
+    font-size: 13px;
   }
 }
