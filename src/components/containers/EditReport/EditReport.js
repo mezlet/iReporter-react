@@ -27,12 +27,12 @@ export class EditReport extends Component {
   render() {
     const {
       userId,
-      success,
+      updateSuccess,
       updatedIncidentId: incidentId,
       incident,
       updateRecord
     } = this.props;
-    if (success) {
+    if (updateSuccess) {
       return (
         <Redirect
           to={{
@@ -75,7 +75,7 @@ EditReport.propTypes = {
   updateRecord: PropTypes.func,
   incident: PropTypes.exact({}),
 
-  success: PropTypes.bool,
+  updateSuccess: PropTypes.bool,
   updatedIncidentId: PropTypes.string
 };
 
@@ -83,7 +83,7 @@ const mapStateToProps = state => ({
   incident: state.getIncident,
   userId: state.auth.user.id,
   updatedIncidentId: state.updateIncident.incident.id,
-  updateSuccess: updateIncident.success
+  updateSuccess: state.updateIncident.success
 });
 export default connect(
   mapStateToProps,
