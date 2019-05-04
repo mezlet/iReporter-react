@@ -1,5 +1,8 @@
-.profile-container {
+.card-wrapper {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 2%;
   .profile-table {
     margin-left: 35px;
     width: 100%;
@@ -10,13 +13,24 @@
     background-color: #000033;
   }
   .profile-card {
-    background-color: #0505cc;
-    color: white;
+    margin-left: 2%;
+    margin-right: 2%;
   }
   .profile_span {
     font-size: 13px;
   }
   .report_total {
     font-size: 13px;
+  }
+  .card-right {
+    margin-top: -2px;
+  }
+  .card-mobile {
+    width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2%;
   }
 }

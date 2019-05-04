@@ -25,8 +25,8 @@ const PersonalDetails = props => {
   return (
     <div>
       <Responsive>
-        <div>
-          <Card>
+        <div className="card-wrapper">
+          <Card className="profile-card">
             {personalInfo[0] && (
               <Card.Content>
                 <Card.Header>Personal Details</Card.Header>
@@ -61,7 +61,7 @@ const PersonalDetails = props => {
               </Card.Content>
             )}
           </Card>
-          <Card>
+          <Card className="card-right">
             <Card.Content>
               <Card.Header>Report Summary</Card.Header>
               <h4 className="report_total">
@@ -80,7 +80,8 @@ const PersonalDetails = props => {
           </Card>
         </div>
       </Responsive>
-      <div className="profile-table">
+
+      <Responsive minWidth={Responsive.onlyTablet.minWidth + 1}>
         <Table celled selectable>
           <Table.Header>
             <Table.Row>
@@ -107,7 +108,39 @@ const PersonalDetails = props => {
               ))}
           </Table.Body>
         </Table>
-      </div>
+      </Responsive>
+      <Responsive maxWidth={Responsive.onlyTablet.minWidth}>
+        <h3>Report List</h3>
+        {userIncidents[0] &&
+          userIncidents.map(incident => (
+            <Card className="card-mobile">
+              <Card.Content>
+                <h4 className="report_total">
+                  Report Id: <span className="profile_span">{incident.id}</span>
+                </h4>
+                <h4 className="report_total">
+                  Date:{' '}
+                  <span className="profile_span">{incident.createdon}</span>
+                </h4>
+                <h4 className="report_total">
+                  Category:{' '}
+                  <span className="profile_span">{incident.type}</span>
+                </h4>
+                <h4 className="report_total">
+                  Title: <span className="profile_span">{incident.title}</span>
+                </h4>
+                <h4 className="report_total">
+                  Location:{' '}
+                  <span className="profile_span">{incident.location}</span>
+                </h4>
+                <h4 className="report_total">
+                  Status:{' '}
+                  <span className="profile_span">{incident.status}</span>
+                </h4>
+              </Card.Content>
+            </Card>
+          ))}
+      </Responsive>
     </div>
   );
 };
