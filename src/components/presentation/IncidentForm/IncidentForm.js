@@ -49,6 +49,7 @@ class IncidentForm extends Component {
     const {
       incident: { incident }
     } = this.props;
+
     return (
       <Form className="record-form" onSubmit={this.handleSubmit}>
         <Form.Field>
