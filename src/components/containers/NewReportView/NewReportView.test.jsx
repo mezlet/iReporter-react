@@ -13,9 +13,7 @@ const props = {
       id: '1'
     }
   },
-  incident: {
-    incident: {}
-  },
+  incident: {},
   auth: {
     user: {}
   },

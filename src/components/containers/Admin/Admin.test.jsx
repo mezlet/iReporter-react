@@ -7,18 +7,13 @@ import { shallow } from 'enzyme';
 import ConnectedAdminPage, { AdminPage } from './AdminPage';
 
 const props = {
-  updateStatus: {
-    success: false
-  },
-  incident: {
-    data: {},
-    isLoading: true
-  },
+  updateStatusSuccess: false,
+  data: {},
+  isLoading: true,
   viewRecords: jest.fn(),
   statusUpdate: jest.fn(),
-  auth: {
-    isLoggedIn: true
-  }
+
+  isLoggedIn: true
 };
 
 const initialState = {
@@ -51,21 +46,19 @@ describe('<AdminPage/> rendering', () => {
   });
 
   it('should update records on incident status update', () => {
-    wrapper.setProps({ updateStatus: { success: true } });
+    wrapper.setProps({ updateStatusSuccess: true });
     expect(wrapper.instance().props.viewRecords).toHaveBeenCalled();
   });
 
   it('should update incident with \'rejected\' status', () => {
     wrapper.setProps({
-      incident: {
-        data: [
-          {
-            id: '1',
-            comment: 'hhshdhhd',
-            title: 'DBJABD'
-          }
-        ]
-      }
+      data: [
+        {
+          id: '1',
+          comment: 'hhshdhhd',
+          title: 'DBJABD'
+        }
+      ]
     });
     const updateIncidentButton = wrapper.find('DropdownItem').at(0);
 
@@ -77,15 +70,13 @@ describe('<AdminPage/> rendering', () => {
 
   it('should update incident with \'resolved\' status', () => {
     wrapper.setProps({
-      incident: {
-        data: [
-          {
-            id: '1',
-            comment: 'hhshdhhd',
-            title: 'DBJABD'
-          }
-        ]
-      }
+      data: [
+        {
+          id: '1',
+          comment: 'hhshdhhd',
+          title: 'DBJABD'
+        }
+      ]
     });
     const updateIncidentButton = wrapper.find('DropdownItem').at(1);
 
@@ -97,15 +88,13 @@ describe('<AdminPage/> rendering', () => {
 
   it('should update incident with \'under-investigation\' status', () => {
     wrapper.setProps({
-      incident: {
-        data: [
-          {
-            id: '1',
-            comment: 'hhshdhhd',
-            title: 'DBJABD'
-          }
-        ]
-      }
+      data: [
+        {
+          id: '1',
+          comment: 'hhshdhhd',
+          title: 'DBJABD'
+        }
+      ]
     });
     const updateIncidentButton = wrapper.find('DropdownItem').at(2);
 

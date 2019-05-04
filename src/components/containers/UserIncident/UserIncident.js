@@ -1,8 +1,15 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/label-has-for */
 import React, { Component } from 'react';
-import { Table, Icon, Modal, Button } from 'semantic-ui-react';
-import { withRouter, Link } from 'react-router-dom';
+import {
+  Table,
+  Icon,
+  Modal,
+  Button,
+  Responsive,
+  Card
+} from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import withContentHeader from '../../../hoc/withContentHeader';
@@ -15,12 +22,9 @@ export class UserIncident extends Component {
     listUserIncident();
   }
 
-  componentDidUpdate({ deletedIncident: { success: isDeleted } }) {
-    const {
-      listUserIncident,
-      deletedIncident: { success }
-    } = this.props;
-    if (success !== isDeleted) {
+  componentDidUpdate({ deleteSuccess: isDeleted }) {
+    const { listUserIncident, deleteSuccess } = this.props;
+    if (deleteSuccess !== isDeleted) {
       listUserIncident();
     }
   }
@@ -31,79 +35,139 @@ export class UserIncident extends Component {
   };
 
   render() {
-    const {
-      incidents: { data, isLoading },
-      history
-    } = this.props;
+    const { data, isLoading, history } = this.props;
     return (
       <div className="incident-viewAll-wrapper">
-        <Table celled selectable>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>ReportId</Table.HeaderCell>
-              <Table.HeaderCell>Date/Time</Table.HeaderCell>
-              <Table.HeaderCell>Category</Table.HeaderCell>
-              <Table.HeaderCell>Title</Table.HeaderCell>
-              <Table.HeaderCell>Location</Table.HeaderCell>
-              <Table.HeaderCell>Status</Table.HeaderCell>
-              <Table.HeaderCell />
-              <Table.HeaderCell />
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            {data.length ? (
-              data.map(incident => (
-                <Table.Row key={incident.id}>
-                  <Table.Cell>{incident.id}</Table.Cell>
-                  <Table.Cell>{incident.createdon}</Table.Cell>
-                  <Table.Cell>{incident.type}</Table.Cell>
-                  <Table.Cell>
-                    <Link to={{ pathname: `/new-report-view/${incident.id}` }}>
-                      {incident.title}
-                    </Link>
-                  </Table.Cell>
+        <Responsive minWidth={Responsive.onlyTablet.minWidth + 1}>
+          <Table celled selectable>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell>ReportId</Table.HeaderCell>
+                <Table.HeaderCell>Date/Time</Table.HeaderCell>
+                <Table.HeaderCell>Category</Table.HeaderCell>
+                <Table.HeaderCell>Title</Table.HeaderCell>
+                <Table.HeaderCell>Location</Table.HeaderCell>
+                <Table.HeaderCell>Status</Table.HeaderCell>
+                <Table.HeaderCell />
+                <Table.HeaderCell />
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {data.length ? (
+                data.map(incident => (
+                  <Table.Row key={incident.id}>
+                    <Table.Cell>{incident.id}</Table.Cell>
+                    <Table.Cell>{incident.createdon}</Table.Cell>
+                    <Table.Cell>{incident.type}</Table.Cell>
+                    <Table.Cell>
+                      <Link
+                        to={{ pathname: `/new-report-view/${incident.id}` }}
+                      >
+                        {incident.title}
+                      </Link>
+                    </Table.Cell>
 
-                  <Table.Cell>{incident.location}</Table.Cell>
-                  <Table.Cell>{incident.status}</Table.Cell>
-                  <Table.Cell>
-                    <Modal
-                      trigger={<Icon name="trash alternate" color="red" />}
-                      header="Warning!"
-                      content="Are you sure you want to delete this incident?"
-                      onActionClick={() => this.handleDelete(incident.id)}
-                      actions={[
-                        'No',
+                    <Table.Cell>{incident.location}</Table.Cell>
+                    <Table.Cell>{incident.status}</Table.Cell>
+                    <Table.Cell>
+                      <Modal
+                        trigger={<Icon name="trash alternate" color="red" />}
+                        header="Warning!"
+                        content="Are you sure you want to delete this incident?"
+                        onActionClick={() => this.handleDelete(incident.id)}
+                        actions={[
+                          'No',
 
-                        {
-                          key: 'done',
-                          content: 'Yes',
-                          positive: true
+                          {
+                            key: 'done',
+                            content: 'Yes',
+                            positive: true
+                          }
+                        ]}
+                      />
+                    </Table.Cell>
+                    <Table.Cell>
+                      <Button
+                        content="Edit"
+                        icon="edit"
+                        labelPosition="left"
+                        color="blue"
+                        onClick={() =>
+                          history.push({
+                            pathname: `/new-report-view/${incident.id}`
+                          })
                         }
-                      ]}
-                    />
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Button
-                      content="Edit"
-                      icon="edit"
-                      labelPosition="left"
-                      color="blue"
-                      onClick={() =>
-                        history.push({
-                          pathname: `/new-report-view/${incident.id}`
-                        })
+                      />
+                    </Table.Cell>
+                  </Table.Row>
+                ))
+              ) : (
+                <tr>
+                  <td>{isLoading && <div>Loading....</div>}</td>
+                </tr>
+              )}
+            </Table.Body>
+          </Table>
+        </Responsive>
+        <Responsive Responsive maxWidth={Responsive.onlyTablet.minWidth}>
+          {data.length ? (
+            data.map(incident => (
+              <Card className="incident-viewAll-card" key={incident.id}>
+                <Card.Header
+                  className="incident-viewAll-title"
+                  as={Link}
+                  to={{ pathname: `/new-report-view/${incident.id}` }}
+                >
+                  {incident.title}
+                </Card.Header>
+                <Card.Content>
+                  <Card.Meta>
+                    <span className="date">Type: {incident.type}</span>
+                    <br />
+                    <span className="date">Location: {incident.location}</span>
+                    <br />
+                    <span className="date">Created: {incident.createdon}</span>
+                    <br />
+                    <span className="date">Status: {incident.status}</span>
+                  </Card.Meta>
+                </Card.Content>
+                <Card.Content>
+                  <Button
+                    content="Edit"
+                    icon="edit"
+                    labelPosition="left"
+                    color="blue"
+                    onClick={() =>
+                      history.push({
+                        pathname: `/new-report-view/${incident.id}`
+                      })
+                    }
+                  />
+
+                  <Modal
+                    trigger={<Icon name="trash alternate" color="red" />}
+                    header="Warning!"
+                    content="Are you sure you want to delete this incident?"
+                    onActionClick={() => this.handleDelete(incident.id)}
+                    actions={[
+                      'No',
+
+                      {
+                        key: 'done',
+                        content: 'Yes',
+                        positive: true
                       }
-                    />
-                  </Table.Cell>
-                </Table.Row>
-              ))
-            ) : (
-              <tr>
-                <td>{isLoading && <div>Loading....</div>}</td>
-              </tr>
-            )}
-          </Table.Body>
-        </Table>
+                    ]}
+                  />
+                </Card.Content>
+              </Card>
+            ))
+          ) : (
+            <tr>
+              <td>{isLoading && <div>Loading....</div>}</td>
+            </tr>
+          )}
+        </Responsive>
       </div>
     );
   }
@@ -111,23 +175,21 @@ export class UserIncident extends Component {
 
 UserIncident.propTypes = {
   listUserIncident: PropTypes.func.isRequired,
-  deletedIncident: PropTypes.shape({
-    success: PropTypes.bool
-  }),
+
+  deleteSuccess: PropTypes.bool,
   deleteIncident: PropTypes.func.isRequired,
   history: PropTypes.shape(),
-  incidents: PropTypes.shape({
-    data: PropTypes.shape(),
-    isLoading: PropTypes.bool
-  })
+  data: PropTypes.exact(),
+  isLoading: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
-  incidents: state.viewIncident,
+  deleteSuccess: state.deleteIncident.success,
+  data: state.viewIncident.data,
+  isLoading: state.viewIncident.isLoading,
   deletedIncident: state.deleteIncident
 });
-const connectIncident = connect(
+export default connect(
   mapStateToProps,
   { listUserIncident: viewUserIncident, deleteIncident: deleteUserIncident }
-)(withRouter(withContentHeader(UserIncident)));
-export default connectIncident;
+)(withContentHeader(UserIncident));

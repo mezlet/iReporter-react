@@ -6,9 +6,10 @@ import {
   Button,
   Dimmer,
   Loader,
-  Segment
+  Segment,
+  Responsive
 } from 'semantic-ui-react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import withContentHeader from '../../../hoc/withContentHeader';
@@ -26,12 +27,7 @@ export class NewReportView extends Component {
   }
 
   render() {
-    const {
-      incident: { incident },
-      isLoading,
-      auth: { user }
-    } = this.props;
-    const userId = user.id;
+    const { incident, isLoading, userId } = this.props;
     const {
       id,
       createdby,
@@ -60,61 +56,73 @@ export class NewReportView extends Component {
 
     return (
       <div className="incident-view-wrapper">
-        <Card className="incident-view-card">
-          <Card.Header className="incident-view-title">{title}</Card.Header>
-          <Image src={images} className="incident-view-image" />
-          <Card.Content>
-            <Card.Description className="incident-view-description">
-              {comment}
-            </Card.Description>
-            <Card.Meta>
-              <span className="date">Type: {type}</span>
-              <br />
-              <span className="date">Location: {location}</span>
-              <br />
-              <span className="date">Created: {createdon}</span>
-            </Card.Meta>
-          </Card.Content>
-          {isUser && (
-            <Card.Content extra>
-              <div className="ui two buttons" />
-              <Button
-                basic
-                as={Link}
-                to={{ pathname: `/edit-incident/${id}`, isEdit: 'no' }}
-              >
-                Edit
-              </Button>
+        <Responsive>
+          <Card className="incident-view-card">
+            <Card.Header className="incident-view-title">{title}</Card.Header>
+
+            <Image src={images} className="incident-view-image" />
+            <Card.Content>
+              <Card.Description className="incident-view-description">
+                {comment}
+              </Card.Description>
+              <Card.Meta>
+                <span className="date">Type: {type}</span>
+                <br />
+                <span className="date">Location: {location}</span>
+                <br />
+                <span className="date">Created: {createdon}</span>
+              </Card.Meta>
             </Card.Content>
-          )}
-        </Card>
+            {isUser && (
+              <Card.Content extra>
+                <div className="ui two buttons" />
+                <Button
+                  basic
+                  as={Link}
+                  to={{ pathname: `/edit-incident/${id}`, isEdit: 'no' }}
+                >
+                  Edit
+                </Button>
+              </Card.Content>
+            )}
+          </Card>
+        </Responsive>
       </div>
     );
   }
 }
 
 NewReportView.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
+  match: PropTypes.exact({
+    path: PropTypes.string,
+    url: PropTypes.string,
+    isExact: PropTypes.bool,
+    params: PropTypes.exact({
       id: PropTypes.string
     })
   }),
-  incident: PropTypes.shape({
-    incident: PropTypes.shape()
+  incident: PropTypes.exact({
+    id: PropTypes.number,
+    status: PropTypes.string,
+    location: PropTypes.string,
+    type: PropTypes.string,
+    createdby: PropTypes.number,
+    createdon: PropTypes.string,
+    title: PropTypes.string,
+    images: PropTypes.arrayOf(PropTypes.string),
+    comment: PropTypes.string
   }),
-  auth: PropTypes.shape({
-    user: PropTypes.shape()
-  }),
+  userId: PropTypes.number,
   isLoading: PropTypes.bool,
   viewIncident: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  incident: state.getIncident,
-  auth: state.auth
+  incident: state.getIncident.incident,
+  userId: state.auth.user.id,
+  isLoading: state.auth.isLoading
 });
-const connectIncident = connect(
+export default connect(
   mapStateToProps,
   { viewIncident: getIncident }
-)(withRouter(withContentHeader(NewReportView)));
-export default connectIncident;
+)(withContentHeader(NewReportView));

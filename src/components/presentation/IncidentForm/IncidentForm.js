@@ -5,10 +5,12 @@ import React, { Component } from 'react';
 import jsonForm from 'formdata-json';
 import PropTypes from 'prop-types';
 import { Form, Button, Image } from 'semantic-ui-react';
+import { validateIncident, showInputError } from '../../../helpers/helpers';
 
 class IncidentForm extends Component {
   state = {
-    imagePreviewUrl: null
+    imagePreviewUrl: null,
+    errors: {}
   };
 
   handleImageChange = e => {
@@ -29,9 +31,12 @@ class IncidentForm extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const data = jsonForm(new FormData(event.target));
-
+    const { errors } = validateIncident(data);
+    if (Object.keys(errors).length) {
+      this.setState({ errors });
+      return;
+    }
     const { createRecord, updateRecord } = this.props;
-
     if (data.id) {
       updateRecord(data);
     } else {
@@ -40,7 +45,7 @@ class IncidentForm extends Component {
   };
 
   render() {
-    const { imagePreviewUrl } = this.state;
+    const { imagePreviewUrl, errors } = this.state;
     const {
       incident: { incident }
     } = this.props;
@@ -53,7 +58,11 @@ class IncidentForm extends Component {
             name="title"
             defaultValue={incident.title}
             onChange={this.handleChange}
+            required
           />
+          <span style={{ color: 'red' }}>
+            {showInputError('title', errors)}
+          </span>
         </Form.Field>
         <Form.Field>
           <label>Category</label>
@@ -65,7 +74,15 @@ class IncidentForm extends Component {
         </Form.Field>
         <Form.Field>
           <label>Location</label>
-          <input type="text" name="location" defaultValue={incident.location} />
+          <input
+            type="text"
+            name="location"
+            defaultValue={incident.location}
+            required
+          />
+          <span style={{ color: 'red' }}>
+            {showInputError('location', errors)}
+          </span>
         </Form.Field>
 
         <Form.Field>
@@ -75,13 +92,22 @@ class IncidentForm extends Component {
             placeholder="Tell your story..."
             name="comment"
             defaultValue={incident.comment}
+            required
           />
+          <span style={{ color: 'red' }}>
+            {showInputError('comment', errors)}
+          </span>
         </Form.Field>
         <Form.Field className="upload-btn-wrapper">
           <label>Image</label>
           <Button className="form-btn">Upload Image</Button>
           <Image src={imagePreviewUrl || incident.images} />
-          <input type="file" name="image" onChange={this.handleImageChange} />
+          <input
+            type="file"
+            name="image"
+            onChange={this.handleImageChange}
+            accept="image/*"
+          />
         </Form.Field>
         <input type="hidden" name="id" defaultValue={incident.id} />
         <br />
@@ -90,12 +116,17 @@ class IncidentForm extends Component {
     );
   }
 }
+
 IncidentForm.propTypes = {
-  incident: PropTypes.shape({
-    incident: PropTypes.shape()
+  incident: PropTypes.exact({
+    id: PropTypes.string,
+    type: PropTypes.string,
+    title: PropTypes.string,
+    location: PropTypes.string,
+    createdon: PropTypes.number
   }),
   createRecord: PropTypes.func.isRequired,
-  updateRecord: PropTypes.func.isRequired
+  updateRecord: PropTypes.func
 };
 
 export default IncidentForm;

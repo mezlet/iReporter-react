@@ -1,15 +1,14 @@
 import * as types from '../../actions/action-types';
+import initialState from '../../../store/initialState';
 
-const initialState = {
-  isLoading: false,
-  isLoggedIn: false,
-  success: false,
-  user: null,
-  errors: {},
-  message: ''
-};
-
-const authReducer = (state = initialState, action) => {
+const authReducer = (
+  state = {
+    ...initialState,
+    isLoggedIn: false,
+    user: null
+  },
+  action
+) => {
   switch (action.type) {
     case types.LOGIN_START:
     case types.REGISTER_START:

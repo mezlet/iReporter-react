@@ -7,11 +7,9 @@ import { shallow } from 'enzyme';
 import connectIncident, { CreateReport } from './CreateReport';
 
 const props = {
-  createdIncident: {
-    success: false,
-    incident: {
-      id: '1'
-    }
+  success: false,
+  incident: {
+    id: '1'
   },
   createRecord: jest.fn()
 };
@@ -43,7 +41,8 @@ describe('<CreateReport/> rendering', () => {
   });
   it('should redirect on createReport success', () => {
     wrapper.setProps({
-      createdIncident: { success: true, incident: { id: '1' } }
+      success: true,
+      incident: { id: '1' }
     });
     expect(wrapper.find('Redirect')).toHaveLength(1);
   });

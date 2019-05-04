@@ -1,16 +1,22 @@
 import '@babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
-import App from './App';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import Route from './routes/Routes';
+import store from './store/store';
 import './scss/main.scss';
 import { checkAuth } from './helpers/helpers';
 
 checkAuth();
 
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <Route />
+    </BrowserRouter>
+    <ToastContainer autoClose={2000} />
+  </Provider>,
   document.getElementById('root')
 );

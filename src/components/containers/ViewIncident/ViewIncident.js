@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import { Card, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import withContentHeader from '../../../hoc/withContentHeader';
 import { viewAllIncident } from '../../../redux/actions/incidents/incident-dispatchers';
@@ -56,15 +56,14 @@ export class ViewIncident extends Component {
 }
 
 ViewIncident.propTypes = {
-  incident: PropTypes.shape({
-    data: PropTypes.shape()
+  incident: PropTypes.exact({
+    data: PropTypes.exact()
   }),
   viewRecords: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({ incident: state.viewIncident });
-const connectIncident = connect(
+export default connect(
   mapStateToProps,
   { viewRecords: viewAllIncident }
-)(withRouter(withContentHeader(ViewIncident)));
-export default connectIncident;
+)(withContentHeader(ViewIncident));

@@ -1,7 +1,6 @@
 import configMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import axios from 'axios';
-// import moxios from "moxios";
 import dotenv from 'dotenv';
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -201,6 +200,121 @@ describe('async', () => {
     await axios.post.mockRejectedValue(mockData2.errors);
     return store
       .dispatch(dispatcher.createIncident({ incident: {} }))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
+  it('should handle getIncident success', async () => {
+    const store = mockStore({});
+    const expectedActions = [
+      { type: types.GET_INCIDENT_START },
+      {
+        type: types.GET_INCIDENT_SUCCESS,
+        payload: mockData.data.data
+      },
+      {
+        type: types.CLEAR_SUCCESS
+      }
+    ];
+    await axios.get.mockResolvedValue(mockData);
+    return store.dispatch(dispatcher.getIncident({ incident: {} })).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  it('should handle getIncident failure', async () => {
+    const store = mockStore({});
+    const expectedActions = [
+      { type: types.GET_INCIDENT_START },
+      {
+        type: types.GET_INCIDENT_FAILURE,
+        payload: mockData2.errors
+      }
+    ];
+    await axios.get.mockRejectedValue(mockData2.errors);
+    return store.dispatch(dispatcher.getIncident({ incident: {} })).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+  it('should handle updateIncident success', async () => {
+    const store = mockStore({});
+    const expectedActions = [
+      { type: types.UPDATE_INCIDENT_START },
+      {
+        type: types.UPDATE_INCIDENT_SUCCESS,
+        payload: mockData.data.data
+      }
+    ];
+    await axios.put.mockResolvedValue(mockData);
+    return store
+      .dispatch(dispatcher.updateIncident({ incident: {} }))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
+  it('should handle updateIncident failure', async () => {
+    const store = mockStore({});
+    const expectedActions = [
+      { type: types.UPDATE_INCIDENT_START },
+      {
+        type: types.UPDATE_INCIDENT_FAILURE,
+        payload: mockData2.errors
+      }
+    ];
+    await axios.put.mockRejectedValue(mockData2.errors);
+    return store
+      .dispatch(dispatcher.updateIncident({ incident: {} }))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
+  it('should handle deleteIncident success', async () => {
+    const store = mockStore({});
+    const expectedActions = [
+      { type: types.DELETE_USER_INCIDENT_START },
+      {
+        type: types.DELETE_USER_INCIDENT_SUCCESS,
+        payload: mockData.data
+      }
+    ];
+    await axios.delete.mockResolvedValue(mockData);
+    return store
+      .dispatch(dispatcher.deleteUserIncident({ incident: {} }))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
+  it('should handle deleteIncident failure', async () => {
+    const store = mockStore({});
+    const expectedActions = [
+      { type: types.DELETE_USER_INCIDENT_START },
+      {
+        type: types.DELETE_USER_INCIDENT_FAILURE,
+        payload: mockData2.errors
+      }
+    ];
+    await axios.delete.mockRejectedValue(mockData2.errors);
+    return store
+      .dispatch(dispatcher.deleteUserIncident({ incident: {} }))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
+  it('should handle updateIncidentStatus success', async () => {
+    const store = mockStore({});
+    const expectedActions = [
+      { type: types.UPDATE_INCIDENT_STATUS_START },
+      {
+        type: types.UPDATE_INCIDENT_STATUS_SUCCESS,
+        payload: mockData.data
+      },
+      {
+        type: types.CLEAR_SUCCESS
+      }
+    ];
+    await axios.put.mockResolvedValue(mockData);
+    return store
+      .dispatch(dispatcher.updateStatusAction({ incident: {} }))
       .then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });

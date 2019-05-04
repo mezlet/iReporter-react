@@ -22,4 +22,20 @@
     width: 100%;
     height: 500px;
   }
+  @media screen and (max-width: 800px) {
+    .incident-view-wrapper {
+      width: 50%;
+      margin: auto auto;
+    }
+    .incident-view-card {
+      margin: auto auto;
+      width: 100%;
+      height: 100%;
+    }
+    .incident-view-image {
+      padding: 2% 0;
+      width: 70%;
+      height: 500px;
+    }
+  }
 }

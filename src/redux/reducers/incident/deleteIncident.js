@@ -1,14 +1,13 @@
 import * as types from '../../actions/action-types';
+import initialState from '../../../store/initialState';
 
-const initialState = {
-  isLoading: false,
-  success: false,
-  incident: {},
-  errors: {},
-  message: ''
-};
-
-const incidentReducer = (state = initialState, action) => {
+const incidentReducer = (
+  state = {
+    ...initialState,
+    incident: {}
+  },
+  action
+) => {
   switch (action.type) {
     case types.DELETE_USER_INCIDENT_START:
       return {
@@ -30,7 +29,6 @@ const incidentReducer = (state = initialState, action) => {
           ...action.payload
         }
       };
-
     default:
       return state;
   }

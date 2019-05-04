@@ -1,15 +1,14 @@
 import * as types from '../../actions/action-types';
+import initialState from '../../../store/initialState';
 
-const initialState = {
-  isLoading: false,
-  isLoggedIn: false,
-  success: false,
-  data: [],
-  errors: {},
-  message: ''
-};
-
-const viewIncidentReducer = (state = initialState, action) => {
+const viewIncidentReducer = (
+  state = {
+    ...initialState,
+    data: [],
+    isLoggedIn: false
+  },
+  action
+) => {
   switch (action.type) {
     case types.VIEWINCIDENT_START:
     case types.VIEW_REDFLAG_START:
