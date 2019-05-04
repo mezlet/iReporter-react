@@ -29,7 +29,10 @@ export class CreateReport extends Component {
       <div>
         <div className="record-form-container">
           <h2>Report an Incident</h2>
-          <IncidentForm incident={incident} createRecord={createRecord} />
+          <IncidentForm
+            incident={{ incident: { incident } }}
+            createRecord={createRecord}
+          />
         </div>
         <Footer />
       </div>
