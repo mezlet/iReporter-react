@@ -10,9 +10,8 @@ import {
   loginUser,
   clearError
 } from '../../../redux/actions/auth/auth-dispatchers';
+import { logo } from '../../../helpers/helpers';
 
-const logo =
-  'https://res.cloudinary.com/do01bfhpw/image/upload/v1556721799/logo.png';
 export class Login extends Component {
   state = {
     user: {
@@ -108,8 +107,8 @@ export class Login extends Component {
 }
 
 Login.propTypes = {
-  auth: PropTypes.shape({
-    errors: PropTypes.shape({
+  auth: PropTypes.exact({
+    errors: PropTypes.exact({
       message: PropTypes.string
     }),
     message: PropTypes.string,
@@ -121,8 +120,7 @@ Login.propTypes = {
 
 const routedLogin = withRouter(Login);
 const mapStateToProps = state => ({ auth: state.auth });
-const connectLogin = connect(
+export default connect(
   mapStateToProps,
   { login: loginUser, clearErrorMessage: clearError }
 )(routedLogin);
-export default connectLogin;

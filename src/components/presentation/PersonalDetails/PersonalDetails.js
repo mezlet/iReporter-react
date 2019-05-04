@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/label-has-for */
 import React from 'react';
-import { Card, Table } from 'semantic-ui-react';
+import { Card, Table, Responsive } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 const PersonalDetails = props => {
@@ -23,59 +23,63 @@ const PersonalDetails = props => {
   userIncidents = userIncidents || [];
 
   return (
-    <div className="profile-container">
-      <div>
-        <Card>
-          {personalInfo[0] && (
+    <div>
+      <Responsive>
+        <div>
+          <Card>
+            {personalInfo[0] && (
+              <Card.Content>
+                <Card.Header>Personal Details</Card.Header>
+                <h4 className="report_total">
+                  First Name:{' '}
+                  <span className="profile_span">
+                    {personalInfo[0].firstname}
+                  </span>
+                </h4>
+                <h4 className="report_total">
+                  Last Name:{' '}
+                  <span className="profile_span">
+                    {personalInfo[0].lastname}
+                  </span>
+                </h4>
+                <h4 className="report_total">
+                  Other Name:{' '}
+                  <span className="profile_span">
+                    {personalInfo[0].othernames}
+                  </span>
+                </h4>
+                <h4 className="report_total">
+                  Email Address:
+                  <span className="profile_span">{personalInfo[0].email}</span>
+                </h4>
+                <h4 className="report_total">
+                  Phone Number:{' '}
+                  <span className="profile_span">
+                    {personalInfo[0].phonenumber}
+                  </span>
+                </h4>
+              </Card.Content>
+            )}
+          </Card>
+          <Card>
             <Card.Content>
-              <Card.Header>Personal Details</Card.Header>
+              <Card.Header>Report Summary</Card.Header>
               <h4 className="report_total">
-                First Name:{' '}
-                <span className="profile_span">
-                  {personalInfo[0].firstname}
-                </span>
+                Total Report: <span className="profile_span">{posts}</span>
               </h4>
               <h4 className="report_total">
-                Last Name:{' '}
-                <span className="profile_span">{personalInfo[0].lastname}</span>
+                Total Pending: <span className="profile_span">{pending}</span>
               </h4>
               <h4 className="report_total">
-                Other Name:{' '}
-                <span className="profile_span">
-                  {personalInfo[0].othernames}
-                </span>
+                Total Rejected: <span className="profile_span">{rejected}</span>
               </h4>
               <h4 className="report_total">
-                Email Address:
-                <span className="profile_span">{personalInfo[0].email}</span>
-              </h4>
-              <h4 className="report_total">
-                Phone Number:{' '}
-                <span className="profile_span">
-                  {personalInfo[0].phonenumber}
-                </span>
+                Total Resolved: <span className="profile_span">{resolved}</span>
               </h4>
             </Card.Content>
-          )}
-        </Card>
-        <Card>
-          <Card.Content>
-            <Card.Header>Report Summary</Card.Header>
-            <h4 className="report_total">
-              Total Report: <span className="profile_span">{posts}</span>
-            </h4>
-            <h4 className="report_total">
-              Total Pending: <span className="profile_span">{pending}</span>
-            </h4>
-            <h4 className="report_total">
-              Total Rejected: <span className="profile_span">{rejected}</span>
-            </h4>
-            <h4 className="report_total">
-              Total Resolved: <span className="profile_span">{resolved}</span>
-            </h4>
-          </Card.Content>
-        </Card>
-      </div>
+          </Card>
+        </div>
+      </Responsive>
       <div className="profile-table">
         <Table celled selectable>
           <Table.Header>
@@ -108,7 +112,7 @@ const PersonalDetails = props => {
   );
 };
 PersonalDetails.propTypes = {
-  personalInfo: PropTypes.shape(),
+  personalInfo: PropTypes.exact(),
   posts: PropTypes.string,
   pending: PropTypes.string,
   rejected: PropTypes.string,

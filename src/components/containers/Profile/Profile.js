@@ -1,7 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import PersonalDetails from '../../presentation/PersonalDetails/PersonalDetails';
 import withContentHeader from '../../../hoc/withContentHeader';
@@ -36,22 +35,23 @@ export class Profile extends Component {
 }
 
 Profile.propTypes = {
-  profile: PropTypes.shape({
-    data: PropTypes.shape({
+  profile: PropTypes.exact({
+    data: PropTypes.exact({
       resolved: PropTypes.string,
       posts: PropTypes.string,
-      user: PropTypes.shape(),
+      user: PropTypes.exact(),
       pending: PropTypes.string,
       rejected: PropTypes.string,
-      userIncidents: PropTypes.shape()
+      userIncidents: PropTypes.exact()
     })
   }),
   getProfile: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({ profile: state.getProfile });
-const connectProfile = connect(
+const mapStateToProps = state => ({
+  profile: state.getProfile
+});
+export default connect(
   mapStateToProps,
   { getProfile: getUserProfile }
-)(withRouter(withContentHeader(Profile)));
-export default connectProfile;
+)(withContentHeader(Profile));

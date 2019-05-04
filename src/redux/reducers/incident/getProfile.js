@@ -1,14 +1,14 @@
 import * as types from '../../actions/action-types';
 
-const initialState = {
-  isLoading: false,
-  success: false,
-  data: {},
-  errors: {},
-  message: ''
-};
+import initialState from '../../../store/initialState';
 
-const getProfileReducer = (state = initialState, action) => {
+const getProfileReducer = (
+  state = {
+    ...initialState,
+    data: {}
+  },
+  action
+) => {
   switch (action.type) {
     case types.GET_USER_PROFILE_START:
       return {

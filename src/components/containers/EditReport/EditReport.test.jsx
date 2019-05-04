@@ -20,12 +20,9 @@ const props = {
     }
   },
   updateRecord: jest.fn(),
-  updateInfo: {
-    success: false,
-    incident: {
-      id: '1'
-    }
-  }
+
+  success: false,
+  userId: 1
 };
 
 const initialState = {
@@ -55,7 +52,8 @@ describe('<EditReport/> rendering', () => {
   });
   it('should redirect on Edit success', () => {
     wrapper.setProps({
-      updateInfo: { success: true, incident: { id: '1' } }
+      success: true,
+      userId: '1'
     });
     expect(wrapper.find('Redirect')).toHaveLength(1);
   });

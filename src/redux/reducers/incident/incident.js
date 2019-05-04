@@ -1,14 +1,8 @@
 import * as types from '../../actions/action-types';
 
-const initialState = {
-  isLoading: false,
-  success: false,
-  incident: {},
-  errors: {},
-  message: ''
-};
+import initialState from '../../../store/initialState';
 
-const incidentReducer = (state = initialState, action) => {
+const incidentReducer = (state = { ...initialState, incident: {} }, action) => {
   switch (action.type) {
     case types.CREATE_INCIDENT_START:
       return {

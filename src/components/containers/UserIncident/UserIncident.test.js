@@ -8,15 +8,11 @@ import connectIncident, { UserIncident } from './UserIncident';
 
 const props = {
   listUserIncident: jest.fn(),
-  deletedIncident: {
-    success: false
-  },
+  deleteSuccess: false,
   deleteIncident: jest.fn(),
   history: {},
-  incidents: {
-    data: [],
-    isLoading: true
-  }
+  data: [],
+  isLoading: true
 };
 
 const initialState = {
@@ -46,22 +42,18 @@ describe('<CreateReport/> rendering', () => {
   });
   it('should render Loader while isLoading is true', () => {
     wrapper.setProps({
-      deletedIncident: {
-        success: true
-      }
+      deleteSuccess: true
     });
     expect(wrapper.instance().props.listUserIncident).toHaveBeenCalled();
   });
   it('should render Loader while isLoading is true', () => {
     wrapper.setProps({
-      incidents: {
-        data: [
-          {
-            id: '1',
-            name: 'something'
-          }
-        ]
-      }
+      data: [
+        {
+          id: '1',
+          name: 'something'
+        }
+      ]
     });
     expect(wrapper.find('TableRow')).toHaveLength(2);
   });

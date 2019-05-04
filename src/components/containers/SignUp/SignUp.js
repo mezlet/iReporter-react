@@ -10,10 +10,8 @@ import {
   registerUser,
   clearError
 } from '../../../redux/actions/auth/auth-dispatchers';
-import { validateUser, showInputError } from '../../../helpers/helpers';
+import { validateUser, showInputError, logo } from '../../../helpers/helpers';
 
-const logo =
-  'https://res.cloudinary.com/do01bfhpw/image/upload/v1556721799/logo.png';
 /**
  * @description renders SignUp component
  * @param { object } props
@@ -212,8 +210,8 @@ export class SignUp extends Component {
   }
 }
 SignUp.propTypes = {
-  auth: PropTypes.shape({
-    errors: PropTypes.shape({
+  auth: PropTypes.exact({
+    errors: PropTypes.exact({
       message: PropTypes.string
     }),
     message: PropTypes.string,
@@ -225,8 +223,7 @@ SignUp.propTypes = {
 
 const routeSignup = withRouter(SignUp);
 const mapStateToProps = state => ({ auth: state.auth });
-const connectSignup = connect(
+export default connect(
   mapStateToProps,
   { signUp: registerUser, clearErrorMessage: clearError }
 )(routeSignup);
-export default connectSignup;

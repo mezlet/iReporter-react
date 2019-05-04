@@ -16,14 +16,14 @@ export const viewAllIncident = () => async dispatch => {
 };
 
 export const viewRedFlag = () => async dispatch => {
-  dispatch(actions.viewIncidentStart());
+  dispatch(actions.viewRedFlagStart());
   try {
     const res = await axios.get(`${baseUrl}/redflag`, {
       headers: { 'x-access-token': localStorage.getItem('token') }
     });
-    dispatch(actions.viewIncidentSuccess(res.data.data));
+    dispatch(actions.viewRedFlagSuccess(res.data.data));
   } catch (errors) {
-    dispatch(actions.viewIncidentFailure(errors));
+    dispatch(actions.viewRedFlagFailure(errors));
   }
 };
 

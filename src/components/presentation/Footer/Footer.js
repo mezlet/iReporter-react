@@ -1,10 +1,13 @@
 import React from 'react';
+import { Responsive } from 'semantic-ui-react';
 
 function Footer() {
   return (
-    <div className="footer">
-      <p>Designed by Leticia</p>
-    </div>
+    <Responsive>
+      <div className="footer">
+        <p>Designed by Leticia</p>
+      </div>
+    </Responsive>
   );
 }
 

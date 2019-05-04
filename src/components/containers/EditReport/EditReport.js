@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/label-has-for */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Footer from '../../presentation/Footer/Footer';
 import IncidentForm from '../../presentation/IncidentForm/IncidentForm';
@@ -26,13 +26,9 @@ export class EditReport extends Component {
 
   render() {
     const {
-      auth: {
-        user: { id }
-      },
-      updateInfo: {
-        success,
-        incident: { id: incidentId }
-      },
+      userId,
+      success,
+      updatedIncidentId: incidentId,
       incident,
       updateRecord
     } = this.props;
@@ -41,12 +37,11 @@ export class EditReport extends Component {
         <Redirect
           to={{
             pathname: `/new-report-view/${incidentId}`,
-            id
+            id: userId
           }}
         />
       );
     }
-
     return (
       <div>
         <div className="record-form-container">
@@ -55,7 +50,7 @@ export class EditReport extends Component {
             incident={incident}
             mode="edit"
             updateRecord={updateRecord}
-            userId={id}
+            userId={userId}
           />
         </div>
         <Footer />
@@ -64,34 +59,33 @@ export class EditReport extends Component {
   }
 }
 EditReport.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
+  match: PropTypes.exact({
+    path: PropTypes.string,
+    url: PropTypes.string,
+    isExact: PropTypes.bool,
+
+    params: PropTypes.exact({
       id: PropTypes.string
     })
   }).isRequired,
   viewIncident: PropTypes.func,
-  auth: PropTypes.shape({
-    user: PropTypes.shape({
-      id: '1'
-    })
-  }),
+
+  userId: PropTypes.string,
+
   updateRecord: PropTypes.func,
-  incident: PropTypes.shape(),
-  updateInfo: PropTypes.shape({
-    success: PropTypes.bool,
-    incident: PropTypes.shape({
-      id: PropTypes.string
-    })
-  })
+  incident: PropTypes.exact({}),
+
+  success: PropTypes.bool,
+  updatedIncidentId: PropTypes.string
 };
 
 const mapStateToProps = state => ({
   incident: state.getIncident,
-  auth: state.auth,
-  updateInfo: state.updateIncident
+  userId: state.auth.user.id,
+  updatedIncidentId: state.updateIncident.incident.id,
+  updateSuccess: updateIncident.success
 });
-const connectIncident = connect(
+export default connect(
   mapStateToProps,
   { viewIncident: getIncident, updateRecord: updateIncident }
-)(withRouter(withContentHeader(EditReport)));
-export default connectIncident;
+)(withContentHeader(EditReport));

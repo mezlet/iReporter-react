@@ -12,17 +12,14 @@ import { createIncident } from '../../../redux/actions/incident/incident-dispatc
 // eslint-disable-next-line react/prefer-stateless-function
 export class CreateReport extends Component {
   render() {
-    const { createdIncident, createRecord } = this.props;
-    const {
-      success,
-      incident: { id }
-    } = createdIncident;
+    const { success, incident, createRecord } = this.props;
+
     if (success) {
       return (
         <Redirect
           to={{
-            pathname: `/new-report-view/${id}`,
-            id
+            pathname: `/new-report-view/${incident.id}`,
+            id: incident.id
           }}
         />
       );
@@ -32,10 +29,7 @@ export class CreateReport extends Component {
       <div>
         <div className="record-form-container">
           <h2>Report an Incident</h2>
-          <IncidentForm
-            incident={createdIncident}
-            createRecord={createRecord}
-          />
+          <IncidentForm incident={incident} createRecord={createRecord} />
         </div>
         <Footer />
       </div>
@@ -43,17 +37,17 @@ export class CreateReport extends Component {
   }
 }
 CreateReport.propTypes = {
-  createdIncident: PropTypes.shape({
-    success: PropTypes.bool,
-    incident: PropTypes.shape({
-      id: PropTypes.string
-    })
+  success: PropTypes.bool.isRequired,
+  incident: PropTypes.exact({
+    id: PropTypes.string
   }).isRequired,
   createRecord: PropTypes.func.isRequired
 };
-const mapStateToProps = state => ({ createdIncident: state.incident });
-const connectIncident = connect(
+const mapStateToProps = state => ({
+  incident: state.incident.incident,
+  success: state.incident.success
+});
+export default connect(
   mapStateToProps,
   { createRecord: createIncident }
 )(withRouter(withContentHeader(CreateReport)));
-export default connectIncident;

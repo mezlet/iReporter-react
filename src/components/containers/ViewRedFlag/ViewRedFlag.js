@@ -3,7 +3,7 @@
 /* eslint-disable no-undef */
 import React, { Component } from 'react';
 import { Card, Image } from 'semantic-ui-react';
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import withContentHeader from '../../../hoc/withContentHeader';
@@ -55,8 +55,8 @@ export class ViewRedFlag extends Component {
   }
 }
 ViewRedFlag.propTypes = {
-  incident: PropTypes.shape({
-    data: PropTypes.shape()
+  incident: PropTypes.exact({
+    data: PropTypes.exact()
   }),
   AllRedFlag: PropTypes.func.isRequired
 };
@@ -65,5 +65,5 @@ const mapStateToProps = state => ({ incident: state.viewIncident });
 const connectIncident = connect(
   mapStateToProps,
   { AllRedFlag: viewRedFlag }
-)(withRouter(withContentHeader(ViewRedFlag)));
+)(withContentHeader(ViewRedFlag));
 export default connectIncident;

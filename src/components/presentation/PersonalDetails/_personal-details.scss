@@ -3,6 +3,8 @@
   .profile-table {
     margin-left: 35px;
     width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
   }
   .Header {
     background-color: #000033;
