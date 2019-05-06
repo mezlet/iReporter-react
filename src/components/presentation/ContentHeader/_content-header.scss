@@ -36,4 +36,12 @@
     margin-right: 50px;
     border-radius: 3px;
   }
+  @media screen and (max-width: 480px) {
+    .signup {
+      display: none;
+    }
+    .login {
+      margin-top: 80px;
+    }
+  }
 }

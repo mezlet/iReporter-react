@@ -16,6 +16,7 @@ import UserIncident from '../components/containers/UserIncident/UserIncident';
 import AuthenticateRoute from '../hoc/AuthenticateRoute';
 import Logout from '../components/containers/Logout/Logout';
 import AdminPage from '../components/containers/Admin/AdminPage';
+import PageNotFound from '../components/presentation/PageNotFound/PageNotFound';
 
 const history = createBrowserHistory();
 
@@ -52,6 +53,7 @@ const route = () => (
           exact
         />
         <AuthenticateRoute path="/record" component={UserIncident} exact />
+        <Route component={PageNotFound} />
       </Switch>
     </Route>
   </BrowserRouter>
