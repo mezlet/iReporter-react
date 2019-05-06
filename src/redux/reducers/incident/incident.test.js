@@ -1,6 +1,8 @@
 import deleteIncident from './deleteIncident';
 import getIncident from './getIncident';
 import getProfile from './getProfile';
+import updateIncident from './updateIncident';
+import updateStatus from './updateStatus';
 
 import * as types from '../../actions/action-types';
 import initialState from '../../../store/initialState';
@@ -162,6 +164,94 @@ describe('AuthReducer', () => {
       isLoading: false,
       success: false,
       message: '',
+      errors: {
+        ...payload
+      }
+    });
+  });
+
+  it('should handle update incident Request', () => {
+    expect(
+      updateIncident(state, {
+        type: types.UPDATE_INCIDENT_START
+      })
+    ).toEqual({
+      ...state,
+      isLoading: true
+    });
+  });
+
+  it('should handle update incident Success', () => {
+    expect(
+      updateIncident(state, {
+        type: types.UPDATE_INCIDENT_SUCCESS,
+        payload
+      })
+    ).toEqual({
+      ...state,
+      success: true,
+      isLoading: false,
+
+      incident: {
+        ...payload
+      },
+      message: payload.message
+    });
+  });
+  it('should handle get incident Failure', () => {
+    expect(
+      updateIncident(state, {
+        type: types.UPDATE_INCIDENT_FAILURE,
+        payload
+      })
+    ).toEqual({
+      ...state,
+      isLoading: false,
+      success: false,
+      message: '',
+      errors: {
+        ...payload
+      }
+    });
+  });
+
+  it('should handle update incident status Request', () => {
+    expect(
+      updateStatus(state, {
+        type: types.UPDATE_INCIDENT_STATUS_START
+      })
+    ).toEqual({
+      ...state,
+      isLoading: true
+    });
+  });
+
+  it('should handle update incident Success', () => {
+    expect(
+      updateStatus(state, {
+        type: types.UPDATE_INCIDENT_STATUS_SUCCESS,
+        payload
+      })
+    ).toEqual({
+      ...state,
+      success: true,
+      isLoading: false,
+
+      incident: {
+        ...payload
+      }
+    });
+  });
+  it('should handle get incident Failure', () => {
+    expect(
+      updateStatus(state, {
+        type: types.UPDATE_INCIDENT_STATUS_FAILURE,
+        payload
+      })
+    ).toEqual({
+      ...state,
+      isLoading: false,
+      success: false,
       errors: {
         ...payload
       }

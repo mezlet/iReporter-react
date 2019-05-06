@@ -41,8 +41,6 @@ export class ViewIncident extends Component {
                   <span className="date">Type: {incident.type}</span>
                   <br />
                   <span className="date">Location: {incident.location}</span>
-                  <br />
-                  <span className="date">Created: {incident.createdon}</span>
                 </Card.Meta>
               </Card.Content>
             </Card>
@@ -56,9 +54,7 @@ export class ViewIncident extends Component {
 }
 
 ViewIncident.propTypes = {
-  incident: PropTypes.exact({
-    data: PropTypes.exact()
-  }),
+  incident: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   viewRecords: PropTypes.func.isRequired
 };
 

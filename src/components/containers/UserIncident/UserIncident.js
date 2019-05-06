@@ -125,8 +125,7 @@ export class UserIncident extends Component {
                     <span className="date">Type: {incident.type}</span>
                     <br />
                     <span className="date">Location: {incident.location}</span>
-                    <br />
-                    <span className="date">Created: {incident.createdon}</span>
+
                     <br />
                     <span className="date">Status: {incident.status}</span>
                   </Card.Meta>
@@ -178,8 +177,13 @@ UserIncident.propTypes = {
 
   deleteSuccess: PropTypes.bool,
   deleteIncident: PropTypes.func.isRequired,
-  history: PropTypes.shape(),
-  data: PropTypes.exact(),
+  history: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  data: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.array
+  ]),
   isLoading: PropTypes.bool
 };
 

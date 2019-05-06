@@ -93,25 +93,13 @@ export class NewReportView extends Component {
 }
 
 NewReportView.propTypes = {
-  match: PropTypes.exact({
-    path: PropTypes.string,
-    url: PropTypes.string,
-    isExact: PropTypes.bool,
-    params: PropTypes.exact({
-      id: PropTypes.string
-    })
-  }),
-  incident: PropTypes.exact({
-    id: PropTypes.number,
-    status: PropTypes.string,
-    location: PropTypes.string,
-    type: PropTypes.string,
-    createdby: PropTypes.number,
-    createdon: PropTypes.string,
-    title: PropTypes.string,
-    images: PropTypes.arrayOf(PropTypes.string),
-    comment: PropTypes.string
-  }),
+  match: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  incident: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.array
+  ]),
   userId: PropTypes.number,
   isLoading: PropTypes.bool,
   viewIncident: PropTypes.func.isRequired

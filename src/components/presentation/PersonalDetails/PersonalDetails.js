@@ -145,11 +145,11 @@ const PersonalDetails = props => {
   );
 };
 PersonalDetails.propTypes = {
-  personalInfo: PropTypes.exact(),
-  posts: PropTypes.string,
-  pending: PropTypes.string,
-  rejected: PropTypes.string,
-  resolved: PropTypes.string,
-  userIncidents: PropTypes.shape()
+  personalInfo: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.array
+  ])
 };
 export default PersonalDetails;

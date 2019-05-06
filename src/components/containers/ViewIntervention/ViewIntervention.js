@@ -41,8 +41,6 @@ export class Viewintervention extends Component {
                   <span className="date">Type: {incident.type}</span>
                   <br />
                   <span className="date">Location: {incident.location}</span>
-                  <br />
-                  <span className="date">Created: {incident.createdon}</span>
                 </Card.Meta>
               </Card.Content>
             </Card>
@@ -55,9 +53,7 @@ export class Viewintervention extends Component {
   }
 }
 Viewintervention.propTypes = {
-  incident: PropTypes.exact({
-    data: PropTypes.exact()
-  }),
+  incident: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   AllIntervention: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({ incident: state.viewIncident });
