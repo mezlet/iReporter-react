@@ -119,13 +119,12 @@ class IncidentForm extends Component {
 }
 
 IncidentForm.propTypes = {
-  incident: PropTypes.exact({
-    id: PropTypes.string,
-    type: PropTypes.string,
-    title: PropTypes.string,
-    location: PropTypes.string,
-    createdon: PropTypes.number
-  }),
+  incident: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.array
+  ]),
   createRecord: PropTypes.func.isRequired,
   updateRecord: PropTypes.func
 };

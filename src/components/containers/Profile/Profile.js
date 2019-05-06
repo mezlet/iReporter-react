@@ -35,16 +35,12 @@ export class Profile extends Component {
 }
 
 Profile.propTypes = {
-  profile: PropTypes.exact({
-    data: PropTypes.exact({
-      resolved: PropTypes.string,
-      posts: PropTypes.string,
-      user: PropTypes.exact(),
-      pending: PropTypes.string,
-      rejected: PropTypes.string,
-      userIncidents: PropTypes.exact()
-    })
-  }),
+  profile: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.array
+  ]),
   getProfile: PropTypes.func.isRequired
 };
 

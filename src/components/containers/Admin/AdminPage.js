@@ -167,7 +167,12 @@ export class AdminPage extends Component {
 }
 AdminPage.propTypes = {
   updateStatusSuccess: PropTypes.bool.isRequired,
-  data: PropTypes.arrayOf(PropTypes.number, PropTypes.string),
+  data: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.array
+  ]),
   isLoading: PropTypes.bool.isRequired,
   statusUpdate: PropTypes.func.isRequired
 };

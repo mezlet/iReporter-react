@@ -41,8 +41,6 @@ export class ViewRedFlag extends Component {
                   <span className="date">Type: {incident.type}</span>
                   <br />
                   <span className="date">Location: {incident.location}</span>
-                  <br />
-                  <span className="date">Created: {incident.createdon}</span>
                 </Card.Meta>
               </Card.Content>
             </Card>
@@ -55,9 +53,7 @@ export class ViewRedFlag extends Component {
   }
 }
 ViewRedFlag.propTypes = {
-  incident: PropTypes.exact({
-    data: PropTypes.exact()
-  }),
+  incident: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   AllRedFlag: PropTypes.func.isRequired
 };
 

@@ -59,21 +59,18 @@ export class EditReport extends Component {
   }
 }
 EditReport.propTypes = {
-  match: PropTypes.exact({
-    path: PropTypes.string,
-    url: PropTypes.string,
-    isExact: PropTypes.bool,
-
-    params: PropTypes.exact({
-      id: PropTypes.string
-    })
-  }).isRequired,
+  match: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
   viewIncident: PropTypes.func,
 
   userId: PropTypes.string,
 
   updateRecord: PropTypes.func,
-  incident: PropTypes.exact({}),
+  incident: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.array
+  ]),
 
   updateSuccess: PropTypes.bool,
   updatedIncidentId: PropTypes.string
