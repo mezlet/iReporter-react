@@ -12,7 +12,7 @@ const state = {
   incident: {}
 };
 
-describe('AuthReducer', () => {
+describe('Incident', () => {
   const payload = {
     data: [
       {

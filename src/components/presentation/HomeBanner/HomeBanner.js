@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 const HomeBanner = () => {
   const landinImage =
@@ -17,7 +18,7 @@ const HomeBanner = () => {
       <p className="tip3">
         Simply{' '}
         <strong>
-          <a href="UI/pages/user/signup.html">Sign Up</a>
+          <Link to="/signup">Sign up</Link>
         </strong>{' '}
         to get started
       </p>
